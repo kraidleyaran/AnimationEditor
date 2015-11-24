@@ -47,7 +47,11 @@ namespace AnimationEditor
             foreach (KeyValuePair<string, Texture2D> pair in Game.gameGraphics.textureManager.Textures)
             {
                 AddTextureLabelToList(pair.Key);
-                Animation textureAnimation = new Animation(pair.Key, pair.Key, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
+                Animation textureAnimation = new Animation(pair.Key, pair.Key, 0, 1, 1, new Vector2(0, 0),
+                    new Vector2(0, 0), 1) {IsLoop = true};
+                Texture2D texture = TextureManager.Textures[pair.Key];
+                textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0,0, texture.Width, texture.Height)));
+                textureAnimation.Play();
                 Game.gameGraphics.AddDrawable(textureAnimation);
             }
             this.Game.Run();
@@ -65,7 +69,7 @@ namespace AnimationEditor
             TextureManager.Textures.Add(texture.Name, texture);
             Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0,0), new Vector2(0,0),1);
             textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0, 0, texture.Width, texture.Height)));
-            textureAnimation.Loop();
+            textureAnimation.IsLoop = true;
             Game.gameGraphics.AddDrawable(textureAnimation);
         }
 

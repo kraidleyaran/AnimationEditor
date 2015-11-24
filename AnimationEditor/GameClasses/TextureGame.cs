@@ -90,13 +90,9 @@ namespace AnimationEditor.GameClasses
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
                 Exit();
-
             // TODO: Add your update logic here
-
-            
             base.Update(gameTime);
         }
 

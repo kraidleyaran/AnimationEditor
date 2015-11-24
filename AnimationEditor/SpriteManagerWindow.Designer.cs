@@ -95,7 +95,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -201,9 +201,9 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(914, 81);
+            this.btn_Save.Location = new System.Drawing.Point(910, 79);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(101, 23);
+            this.btn_Save.Size = new System.Drawing.Size(107, 23);
             this.btn_Save.TabIndex = 14;
             this.btn_Save.Text = "Save Sprite Sheet";
             this.btn_Save.UseVisualStyleBackColor = true;
