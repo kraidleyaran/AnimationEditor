@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
+using GameGraphicsLib;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AnimationEditor
 {
@@ -20,9 +22,13 @@ namespace AnimationEditor
 
         private void spriteSheetManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpriteSheetManagerWindow spriteManagerWindow = new SpriteSheetManagerWindow(Game.gameGraphics.textureManager);
-
+            List<BinaryTexture> textures = Game.gameGraphics.textureManager.Textures.Select(pair => new BinaryTexture(pair.Value)).ToList();
+            SpriteSheetManagerWindow spriteManagerWindow = new SpriteSheetManagerWindow(textures);
             spriteManagerWindow.ShowDialog();
+            foreach (KeyValuePair<string, BinaryTexture> pair in spriteManagerWindow.ReturnTextures)
+            {
+                Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
+            }
         }
 
         public TextureGame Game { get; set; }

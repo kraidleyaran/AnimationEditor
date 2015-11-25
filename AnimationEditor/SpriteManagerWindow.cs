@@ -18,16 +18,20 @@ namespace AnimationEditor
 {
     public partial class SpriteSheetManagerWindow : Form
     {
-        public GraphicsManager graphicsManager;
-        public TextureManager TextureManager;
-        public SpriteSheetManagerWindow(TextureManager textureManager)
+        private bool texturesLoaded = false;
+        private GraphicsManager graphicsManager;
+        public Dictionary<string, BinaryTexture> ReturnTextures = new Dictionary<string, BinaryTexture>();
+        public SpriteSheetManagerWindow(List<BinaryTexture> textures)
         {
             InitializeComponent();
             this.Focus();
-            TextureManager = textureManager;
             panel_SpriteSheetPreview.Controls.Add(pictureBox_SpriteSheetPreview);
+            foreach (BinaryTexture texture in textures)
+            {
+                ReturnTextures.Add(texture.Name, texture);
+            }
         }
-
+        
         private Texture2D selectedTexture;
 
 
@@ -40,22 +44,24 @@ namespace AnimationEditor
 
             this.Game = new TextureGame(this.pictureBox_SpriteSheetPreview.Handle, this, this.pictureBox_SpriteSheetPreview, new Vector2(this.pictureBox_SpriteSheetPreview.Width, this.pictureBox_SpriteSheetPreview.Height));
             graphicsManager = new GraphicsManager(Game.gameGraphics);
-            Game.gameGraphics.textureManager = TextureManager;
+
             pictureBox_SpriteSheetPreview.Width = Game.gameGraphics.GraphicsManager.PreferredBackBufferWidth;
             pictureBox_SpriteSheetPreview.Height = Game.gameGraphics.GraphicsManager.PreferredBackBufferHeight;
 
             Game.gameForm.GotFocus += delegate(object o, EventArgs args)
             {
                 this.Focus();
+                if (texturesLoaded) return;
+                foreach (KeyValuePair<string, BinaryTexture> pair in ReturnTextures)
+                {
+                    Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
+                    AddTextureLabelToList(pair.Value.Name);
+                    Animation textureAnimation = new Animation(pair.Value.Name, pair.Value.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
+                    textureAnimation.AddFrame(new Frame(pair.Value.Width, pair.Value.Height, new GameRectangle(0, 0, pair.Value.Width, pair.Value.Height)));
+                    Game.gameGraphics.AddDrawable(textureAnimation);
+                }
+                texturesLoaded = true;
             };
-            foreach (KeyValuePair<string, Texture2D> pair in Game.gameGraphics.textureManager.Textures)
-            {
-                AddTextureLabelToList(pair.Value.Name);
-                Animation textureAnimation = new Animation(pair.Value.Name, pair.Value.Name, 0, 1, 1, new Vector2(0, 0),new Vector2(0, 0), 1);
-                Texture2D texture = TextureManager.Textures[pair.Value.Name];
-                textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0,0, texture.Width, texture.Height)));
-                Game.gameGraphics.AddDrawable(textureAnimation);
-            }
             this.Game.Run();
 
         }
@@ -68,7 +74,7 @@ namespace AnimationEditor
         private void AddTextureToList(Texture2D texture)
         {
             AddTextureLabelToList(texture.Name);
-            TextureManager.Textures.Add(texture.Name, texture);
+            Game.gameGraphics.textureManager.Textures.Add(texture.Name, texture);
             Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0,0), new Vector2(0,0),1);
             textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0, 0, texture.Width, texture.Height)));
             Game.gameGraphics.AddDrawable(textureAnimation);
@@ -81,7 +87,7 @@ namespace AnimationEditor
                 Game.gameGraphics.RemoveFromDrawList(textureName);
             }
             listBox_SpriteSheets.Items.Remove(textureName);
-            TextureManager.Textures.Remove(textureName);
+            Game.gameGraphics.textureManager.Textures.Remove(textureName);
         }
 
         private void btn_New_Click(object sender, EventArgs e)
@@ -140,6 +146,12 @@ namespace AnimationEditor
 
         private void SpriteManagerWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ReturnTextures.Clear();
+            ReturnTextures = new Dictionary<string, BinaryTexture>();
+            foreach (KeyValuePair<string, Texture2D> pair in Game.gameGraphics.textureManager.Textures)
+            {
+                ReturnTextures.Add(pair.Key, new BinaryTexture(pair.Value) );
+            }
             Game.CloseGame();
         }
 
@@ -172,7 +184,7 @@ namespace AnimationEditor
                 Value = true
             };
             graphicsManager.ExecuteAction(loopAnimation);
-            selectedTexture = TextureManager.Textures[selectedItem];
+            selectedTexture = Game.gameGraphics.textureManager.Textures[selectedItem];
         }
 
         private void btn_TransparentColor_Click(object sender, EventArgs e)
@@ -183,7 +195,7 @@ namespace AnimationEditor
             {
                 case DialogResult.OK:
                     Texture2D newTexture = BinaryTexture.RemoveTransparentColor(selectedTexture, GameGraphics.ConvertSystemColorToXNA(colorDialog.Color));
-                    TextureManager.Textures[newTexture.Name] = newTexture;
+                    Game.gameGraphics.textureManager.Textures[newTexture.Name] = newTexture;
                     selectedTexture = newTexture;
                     return;
                 default:
@@ -214,7 +226,7 @@ namespace AnimationEditor
         {
             if (selectedTexture.Name != txtBox_SheetName.Text)
             {
-                if(TextureManager.Textures.ContainsKey(txtBox_SheetName.Text))
+                if (Game.gameGraphics.textureManager.Textures.ContainsKey(txtBox_SheetName.Text))
                 {
                     MessageBox.Show(txtBox_SheetName.Text + " Sprite Sheet name already exists, try again");
                     return;
@@ -227,9 +239,14 @@ namespace AnimationEditor
             }
             else
             {
-                TextureManager.Textures[selectedTexture.Name] = selectedTexture;
+                Game.gameGraphics.textureManager.Textures[selectedTexture.Name] = selectedTexture;
             }
             
+        }
+
+        private void WindowFocus(object sender, EventArgs e)
+        {
+
         }
     }
 }
