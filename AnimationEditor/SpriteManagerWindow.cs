@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
 using GameGraphicsLib;
+using GraphicsManagerLib;
+using GraphicsManagerLib.Actions.AnimationAction;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Cyotek.Windows.Forms;
@@ -16,6 +18,7 @@ namespace AnimationEditor
 {
     public partial class SpriteSheetManagerWindow : Form
     {
+        public GraphicsManager graphicsManager;
         public TextureManager TextureManager;
         public SpriteSheetManagerWindow(TextureManager textureManager)
         {
@@ -36,6 +39,7 @@ namespace AnimationEditor
             panel_SpriteSheetPreview.AutoScroll = true;
 
             this.Game = new TextureGame(this.pictureBox_SpriteSheetPreview.Handle, this, this.pictureBox_SpriteSheetPreview, new Vector2(this.pictureBox_SpriteSheetPreview.Width, this.pictureBox_SpriteSheetPreview.Height));
+            graphicsManager = new GraphicsManager(Game.gameGraphics);
             Game.gameGraphics.textureManager = TextureManager;
             pictureBox_SpriteSheetPreview.Width = Game.gameGraphics.GraphicsManager.PreferredBackBufferWidth;
             pictureBox_SpriteSheetPreview.Height = Game.gameGraphics.GraphicsManager.PreferredBackBufferHeight;
@@ -46,12 +50,10 @@ namespace AnimationEditor
             };
             foreach (KeyValuePair<string, Texture2D> pair in Game.gameGraphics.textureManager.Textures)
             {
-                AddTextureLabelToList(pair.Key);
-                Animation textureAnimation = new Animation(pair.Key, pair.Key, 0, 1, 1, new Vector2(0, 0),
-                    new Vector2(0, 0), 1) {IsLoop = true};
-                Texture2D texture = TextureManager.Textures[pair.Key];
+                AddTextureLabelToList(pair.Value.Name);
+                Animation textureAnimation = new Animation(pair.Value.Name, pair.Value.Name, 0, 1, 1, new Vector2(0, 0),new Vector2(0, 0), 1);
+                Texture2D texture = TextureManager.Textures[pair.Value.Name];
                 textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0,0, texture.Width, texture.Height)));
-                textureAnimation.Play();
                 Game.gameGraphics.AddDrawable(textureAnimation);
             }
             this.Game.Run();
@@ -69,7 +71,6 @@ namespace AnimationEditor
             TextureManager.Textures.Add(texture.Name, texture);
             Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0,0), new Vector2(0,0),1);
             textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0, 0, texture.Width, texture.Height)));
-            textureAnimation.IsLoop = true;
             Game.gameGraphics.AddDrawable(textureAnimation);
         }
 
@@ -88,11 +89,10 @@ namespace AnimationEditor
             OpenFileDialog getImage = new OpenFileDialog();
             getImage.Filter = "PNG Files (.png)| *.png|All Files (*.*)| *.*";
             DialogResult result = getImage.ShowDialog();
-            Texture2D newTexture;
             switch (result)
             {
                 case DialogResult.OK:
-                    newTexture = Game.gameGraphics.LoadTexture(getImage.FileName);
+                    Texture2D newTexture = Game.gameGraphics.LoadTexture(getImage.FileName);
                     if (newTexture != null)
                     {
                         List<string> textureNames = Game.gameGraphics.textureManager.Textures.Keys.ToList();
@@ -107,11 +107,12 @@ namespace AnimationEditor
                                 }
                                 newTexture.Name = spriteSheetName.ReturnName;
                                 AddTextureToList(newTexture);
-                                Animation textureAnimation = new Animation(spriteSheetName.ReturnName,
-                                    spriteSheetName.ReturnName, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1)
-                                {
+                                Animation textureAnimation = new Animation(newTexture.Name,
+                                    newTexture.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
+                                /*{
                                     IsLoop = true
                                 };
+                                 */
                                 textureAnimation.AddFrame(new Frame(newTexture.Width, newTexture.Height,
                                     new GameRectangle(0, 0, newTexture.Width, newTexture.Height )));
                                 Game.gameGraphics.AddDrawable(textureAnimation);
@@ -163,8 +164,14 @@ namespace AnimationEditor
             txtBox_SheetName.Text = selectedItem;
 
 
-            Game.gameGraphics.AddToDrawList(new DrawParam(listBox_SpriteSheets.SelectedItem.ToString(),
-                listBox_SpriteSheets.SelectedItem.ToString(), new Vector2(0, 0), DrawnType.Animation ));
+            Game.gameGraphics.AddToDrawList(new DrawParam(selectedItem, selectedItem, new Vector2(0, 0), DrawnType.Animation));
+            LoopAction loopAnimation = new LoopAction
+            {
+                Name = "loop " + selectedItem,
+                Drawable = selectedItem,
+                Value = true
+            };
+            graphicsManager.ExecuteAction(loopAnimation);
             selectedTexture = TextureManager.Textures[selectedItem];
         }
 

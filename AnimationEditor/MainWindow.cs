@@ -23,7 +23,6 @@ namespace AnimationEditor
             SpriteSheetManagerWindow spriteManagerWindow = new SpriteSheetManagerWindow(Game.gameGraphics.textureManager);
 
             spriteManagerWindow.ShowDialog();
-            Game.gameGraphics.textureManager = spriteManagerWindow.TextureManager;
         }
 
         public TextureGame Game { get; set; }

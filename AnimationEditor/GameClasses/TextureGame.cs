@@ -93,6 +93,7 @@ namespace AnimationEditor.GameClasses
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
+            gameGraphics.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -124,8 +125,8 @@ namespace AnimationEditor.GameClasses
         public void CloseGame()
         {
             this.Exit();
-            this.Dispose();
-            this.gameForm.Dispose();
+            //this.Dispose();
+            //this.gameForm.Dispose();
         }
     }
 }
