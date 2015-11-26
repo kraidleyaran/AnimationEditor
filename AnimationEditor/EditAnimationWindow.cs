@@ -65,7 +65,7 @@ namespace AnimationEditor
                     switch (newAnimationNameWindow.DialogResult)
                     {
                         case DialogResult.OK:
-                            ReturnAnimation = new Animation(newAnimationNameWindow.ReturnName);
+                            ReturnAnimation = new Animation(newAnimationNameWindow.ReturnName, "", 1, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
                             txtBox_AnimationName.Text = ReturnAnimation.Name;
                             SetAnimationFieldsToDefault();
                             return;
@@ -81,7 +81,8 @@ namespace AnimationEditor
                 SetSpriteSheetWindow setTextureWindow = new SetSpriteSheetWindow(textureNames);
                 setTextureWindow.ShowDialog();
                 textureName = setTextureWindow.SelectedTexture;
-                
+                ReturnAnimation.Texture = textureName;
+
             }
             _textureGame.gameGraphics.GraphicsManager.DeviceCreated += delegate(object o, EventArgs args)
             {
@@ -141,6 +142,7 @@ namespace AnimationEditor
                 {
                     _frameGame.gameGraphics.textureManager.Textures.Add(texture.Name, TextureManager.ConvertDataToTexture(texture, _frameGame.gameGraphics.GraphicsManager.GraphicsDevice));
                 }
+
             };
             _frameGame.Run();
         }
@@ -179,6 +181,16 @@ namespace AnimationEditor
             _textureGame.gameGraphics.ClearDrawList();
             _textureGame.gameGraphics.AddToDrawList(new DrawParam(textureName, textureName, new Vector2(0, 0), DrawnType.Animation));
             lbl_TextureName.Text = textureName;
+        }
+
+        private void SetReturnAnimation(Animation animation)
+        {
+            ReturnAnimation = animation;
+            txtBox_AnimationName.Text = ReturnAnimation.Name;
+            txtBox_Depth.Text = animation.Depth.ToString();
+            txtBox_Scale.Text = animation.Scale.ToString();
+            txtBox_Speed.Text = animation.FramesPerSecond.ToString();
+            _frameGame.gameGraphics.AddDrawable(ReturnAnimation);
         }
 
     }
