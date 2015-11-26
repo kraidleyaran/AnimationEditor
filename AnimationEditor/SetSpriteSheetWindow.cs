@@ -27,12 +27,32 @@ namespace AnimationEditor
             combo_TextureNames.SelectedItem = defaultTexture;
         }
 
+        public string SelectedTexture { get; set; }
+
         private void SetTextureList(List<string> names)
         {
             foreach (string name in names)
             {
                 combo_TextureNames.Items.Add(name);
             }
+        }
+
+        private void btn_OK_Click(object sender, EventArgs e)
+        {
+            if (combo_TextureNames.SelectedItem == null)
+            {
+                MessageBox.Show("You must select a sprite sheet");
+                return;
+            }
+            SelectedTexture = combo_TextureNames.SelectedItem.ToString();
+            DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

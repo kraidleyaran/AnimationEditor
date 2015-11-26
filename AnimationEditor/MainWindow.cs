@@ -15,21 +15,29 @@ namespace AnimationEditor
 {
     public partial class MainWindow : Form
     {
+        private List<BinaryTexture> binaryTextures;
         public MainWindow()
         {
             InitializeComponent();
+            binaryTextures = new List<BinaryTexture>();
         }
 
         private void spriteSheetManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<BinaryTexture> textures = Game.gameGraphics.textureManager.Textures.Select(pair => new BinaryTexture(pair.Value)).ToList();
             SpriteSheetManagerWindow spriteManagerWindow = new SpriteSheetManagerWindow(textures);
+            //SpriteSheetManagerWindow spriteManagerWindow = new SpriteSheetManagerWindow(Game);
             spriteManagerWindow.ShowDialog();
+            Game.gameGraphics.textureManager.ClearAllTextures();
+            binaryTextures.Clear();
+            binaryTextures = new List<BinaryTexture>();
             foreach (KeyValuePair<string, BinaryTexture> pair in spriteManagerWindow.ReturnTextures)
             {
                 Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
+
+                binaryTextures.Add(pair.Value);
             }
-        }
+        } 
 
         public TextureGame Game { get; set; }
 
@@ -45,7 +53,7 @@ namespace AnimationEditor
 
         private void btn_NewAnimation_Click(object sender, EventArgs e)
         {
-            EditAnimationWindow animationWindow = new EditAnimationWindow(Game.gameGraphics.textureManager, Game.gameGraphics.GetDrawnNames());
+            EditAnimationWindow animationWindow = new EditAnimationWindow(binaryTextures, Game.gameGraphics.GetDrawnNames());
             animationWindow.ShowDialog();
         }
     }

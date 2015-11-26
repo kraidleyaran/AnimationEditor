@@ -24,12 +24,11 @@ namespace AnimationEditor.GameClasses
             PictureBox = pictureBox;
 
             gameGraphics = new GameGraphics(this);
-            Content.RootDirectory = "Content";
             int width = 0;
             int height = 0;
             width += pictureBox.Width;
             height += pictureBox.Height;
-            gameGraphics.GraphicsManager.PreparingDeviceSettings += graphics_PreparingDeviceSettings;
+            gameGraphics.GraphicsManager.PreparingDeviceSettings += graphics_PreparingDeviceSettings;            
             gameGraphics.GraphicsManager.PreferredBackBufferWidth = width;
             gameGraphics.GraphicsManager.PreferredBackBufferHeight = height;
 

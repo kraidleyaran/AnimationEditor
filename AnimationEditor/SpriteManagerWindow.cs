@@ -30,6 +30,7 @@ namespace AnimationEditor
             {
                 ReturnTextures.Add(texture.Name, texture);
             }
+
         }
         
         private Texture2D selectedTexture;
@@ -51,16 +52,17 @@ namespace AnimationEditor
             Game.gameForm.GotFocus += delegate(object o, EventArgs args)
             {
                 this.Focus();
-                if (texturesLoaded) return;
+            };
+            Game.gameGraphics.GraphicsManager.DeviceCreated += delegate(object o, EventArgs args)
+            {
                 foreach (KeyValuePair<string, BinaryTexture> pair in ReturnTextures)
                 {
                     Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
                     AddTextureLabelToList(pair.Value.Name);
                     Animation textureAnimation = new Animation(pair.Value.Name, pair.Value.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
-                    textureAnimation.AddFrame(new Frame(pair.Value.Width, pair.Value.Height, new GameRectangle(0, 0, pair.Value.Width, pair.Value.Height)));
+                    textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, pair.Value.Width, pair.Value.Height)));
                     Game.gameGraphics.AddDrawable(textureAnimation);
                 }
-                texturesLoaded = true;
             };
             this.Game.Run();
 
@@ -76,7 +78,7 @@ namespace AnimationEditor
             AddTextureLabelToList(texture.Name);
             Game.gameGraphics.textureManager.Textures.Add(texture.Name, texture);
             Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0,0), new Vector2(0,0),1);
-            textureAnimation.AddFrame(new Frame(texture.Width, texture.Height, new GameRectangle(0, 0, texture.Width, texture.Height)));
+            textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, texture.Width, texture.Height)));
             Game.gameGraphics.AddDrawable(textureAnimation);
         }
 
@@ -119,8 +121,7 @@ namespace AnimationEditor
                                     IsLoop = true
                                 };
                                  */
-                                textureAnimation.AddFrame(new Frame(newTexture.Width, newTexture.Height,
-                                    new GameRectangle(0, 0, newTexture.Width, newTexture.Height )));
+                                textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, newTexture.Width, newTexture.Height )));
                                 Game.gameGraphics.AddDrawable(textureAnimation);
                                 break;
                             default:
@@ -242,11 +243,6 @@ namespace AnimationEditor
                 Game.gameGraphics.textureManager.Textures[selectedTexture.Name] = selectedTexture;
             }
             
-        }
-
-        private void WindowFocus(object sender, EventArgs e)
-        {
-
         }
     }
 }

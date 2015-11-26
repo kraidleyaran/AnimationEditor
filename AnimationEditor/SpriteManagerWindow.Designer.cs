@@ -272,7 +272,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SpriteSheetManagerWindow";
             this.Text = "Sprite Sheet Manager";
-            this.Activated += new System.EventHandler(this.WindowFocus);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SpriteManagerWindow_FormClosing);
             this.Shown += new System.EventHandler(this.OnShown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_SpriteSheetPreview)).EndInit();

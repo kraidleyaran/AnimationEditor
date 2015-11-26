@@ -24,7 +24,6 @@ namespace AnimationEditor.GameClasses
             PictureBox = pictureBox;
 
             gameGraphics = new GameGraphics(this);
-            Content.RootDirectory = "Content";
             int width = 0;
             int height = 0;
             width += pictureBox.Width;
@@ -40,7 +39,6 @@ namespace AnimationEditor.GameClasses
                 gameForm.Visible = false;
             };
             BackgroundColor = Color.CornflowerBlue;
-
         }
 
         public Color BackgroundColor { get; set; }
@@ -131,5 +129,6 @@ namespace AnimationEditor.GameClasses
             this.Dispose();
             this.gameForm.Dispose();
         }
+
     }
 }
