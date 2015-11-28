@@ -188,6 +188,7 @@ namespace AnimationEditor
                 {
                     _frameGame.gameGraphics.textureManager.Textures.Add(texture.Name, TextureManager.ConvertDataToTexture(texture, _frameGame.gameGraphics.GraphicsManager.GraphicsDevice));
                 }
+
             };
 
             _frameGame.gameGraphics.AddDrawable(ReturnAnimation);
