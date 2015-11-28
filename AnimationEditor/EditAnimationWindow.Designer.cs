@@ -69,6 +69,7 @@
             this.pictureBox_FrameDisplay = new System.Windows.Forms.PictureBox();
             this.label_DisplayFrameCurrent = new System.Windows.Forms.Label();
             this.btn_Preview = new System.Windows.Forms.Button();
+            this.btn_SetFrame = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_TextureDisplay)).BeginInit();
             this.menuStrip_Main.SuspendLayout();
             this.panel_XNA.SuspendLayout();
@@ -91,7 +92,7 @@
             // listBox_Frames
             // 
             this.listBox_Frames.FormattingEnabled = true;
-            this.listBox_Frames.Location = new System.Drawing.Point(18, 82);
+            this.listBox_Frames.Location = new System.Drawing.Point(18, 80);
             this.listBox_Frames.Name = "listBox_Frames";
             this.listBox_Frames.Size = new System.Drawing.Size(70, 537);
             this.listBox_Frames.TabIndex = 2;
@@ -103,7 +104,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip_Main.Location = new System.Drawing.Point(0, 0);
             this.menuStrip_Main.Name = "menuStrip_Main";
-            this.menuStrip_Main.Size = new System.Drawing.Size(959, 24);
+            this.menuStrip_Main.Size = new System.Drawing.Size(1020, 24);
             this.menuStrip_Main.TabIndex = 3;
             this.menuStrip_Main.Text = "menuStrip1";
             // 
@@ -253,7 +254,8 @@
             this.panel_XNA.Location = new System.Drawing.Point(331, 57);
             this.panel_XNA.Name = "panel_XNA";
             this.panel_XNA.Size = new System.Drawing.Size(619, 271);
-            this.panel_XNA.TabIndex = 17;
+            this.panel_XNA.TabIndex = 77;
+            this.panel_XNA.TabStop = true;
             // 
             // txtBox_Scale
             // 
@@ -279,7 +281,8 @@
             // lbl_FrameCount
             // 
             this.lbl_FrameCount.AutoSize = true;
-            this.lbl_FrameCount.Location = new System.Drawing.Point(5, 9);
+            this.lbl_FrameCount.Location = new System.Drawing.Point(5, 7);
+            this.lbl_FrameCount.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lbl_FrameCount.Name = "lbl_FrameCount";
             this.lbl_FrameCount.Size = new System.Drawing.Size(67, 13);
             this.lbl_FrameCount.TabIndex = 21;
@@ -288,7 +291,7 @@
             // lbl_CurrentFrameCount
             // 
             this.lbl_CurrentFrameCount.AutoSize = true;
-            this.lbl_CurrentFrameCount.Location = new System.Drawing.Point(70, 9);
+            this.lbl_CurrentFrameCount.Location = new System.Drawing.Point(76, 7);
             this.lbl_CurrentFrameCount.Name = "lbl_CurrentFrameCount";
             this.lbl_CurrentFrameCount.Size = new System.Drawing.Size(13, 13);
             this.lbl_CurrentFrameCount.TabIndex = 22;
@@ -368,7 +371,7 @@
             // lbl_FrameNumber
             // 
             this.lbl_FrameNumber.AutoSize = true;
-            this.lbl_FrameNumber.Location = new System.Drawing.Point(64, 9);
+            this.lbl_FrameNumber.Location = new System.Drawing.Point(71, 9);
             this.lbl_FrameNumber.Name = "lbl_FrameNumber";
             this.lbl_FrameNumber.Size = new System.Drawing.Size(13, 13);
             this.lbl_FrameNumber.TabIndex = 15;
@@ -449,11 +452,22 @@
             this.btn_Preview.Text = "Preview";
             this.btn_Preview.UseVisualStyleBackColor = true;
             // 
+            // btn_SetFrame
+            // 
+            this.btn_SetFrame.Location = new System.Drawing.Point(168, 517);
+            this.btn_SetFrame.Name = "btn_SetFrame";
+            this.btn_SetFrame.Size = new System.Drawing.Size(75, 23);
+            this.btn_SetFrame.TabIndex = 35;
+            this.btn_SetFrame.Text = "Set Frame";
+            this.btn_SetFrame.UseVisualStyleBackColor = true;
+            this.btn_SetFrame.Click += new System.EventHandler(this.btn_SetFrame_Click);
+            // 
             // EditAnimationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 634);
+            this.ClientSize = new System.Drawing.Size(1020, 634);
+            this.Controls.Add(this.btn_SetFrame);
             this.Controls.Add(this.btn_Preview);
             this.Controls.Add(this.label_DisplayFrameCurrent);
             this.Controls.Add(this.panel_FrameDisplay);
@@ -534,5 +548,6 @@
         private System.Windows.Forms.PictureBox pictureBox_FrameDisplay;
         private System.Windows.Forms.Label label_DisplayFrameCurrent;
         private System.Windows.Forms.Button btn_Preview;
+        private System.Windows.Forms.Button btn_SetFrame;
     }
 }

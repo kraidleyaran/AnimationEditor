@@ -33,7 +33,7 @@ namespace AnimationEditor
                 {
                     case DialogResult.OK:
                         txtBox_Name.SelectedText = ReturnName;
-                        return;
+                        break;
                     case DialogResult.Cancel:
                         DialogResult = DialogResult.Cancel;
                         Close();
