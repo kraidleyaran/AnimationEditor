@@ -36,12 +36,27 @@ namespace AnimationEditor.GameClasses
             Mouse.WindowHandle = drawingSurface;
             gameForm.VisibleChanged += delegate(object sender, EventArgs args)
             {
-                gameForm.Visible = false;
+                SetVisibleChanged(false);
+                
             };
             BackgroundColor = Color.CornflowerBlue;
 
         }
 
+        private delegate void SetFormCallBack(bool visible);
+
+        private void SetVisibleChanged(bool visible)
+        {
+            if (gameForm.InvokeRequired)
+            {
+                SetFormCallBack d = new SetFormCallBack(SetVisibleChanged);
+                this.gameForm.BeginInvoke(d, new object[] { visible });
+            }
+            else
+            {
+                gameForm.Visible = false;
+            }
+        }
         public Color BackgroundColor { get; set; }
         private void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
         {

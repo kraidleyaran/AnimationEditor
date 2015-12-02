@@ -8,21 +8,28 @@ using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
 using GameGraphicsLib;
+using GameGraphicsLib.DrawableShapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GraphicsManagerLib;
 using GraphicsManagerLib.Actions;
 using GraphicsManagerLib.Actions.AnimationAction;
+using GraphicsManagerLib.Actions.PositionActions;
+using GraphicsManagerLib.Actions.ShapeActions.RectangleActions;
+using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace AnimationEditor
 {
     public partial class EditAnimationWindow : Form
     {
-        private AnimationGame _textureGame;
+        private static string frameRectangleName = "frameRectangle";
+        private TextureGame _textureGame;
         private AnimationGame _frameGame;
 
         private GraphicsManager animationManager;
+        private GraphicsManager textureManager;
 
         private TextureManager _textureManager;
 
@@ -32,7 +39,7 @@ namespace AnimationEditor
 
         public Animation ReturnAnimation;
 
-        private bool _newAnimation = false;
+        public bool _newAnimation = false;
         private bool _frameGameLoaded = false;
         public EditAnimationWindow(List<BinaryTexture> binaryTextures, List<string> animationNames)
         {
@@ -53,12 +60,14 @@ namespace AnimationEditor
 
         public void OnShown_Window(object sender, EventArgs e)
         {
+            btn_SetFrame.Enabled = false;
             panel_XNA.Controls.Add(pictureBox_TextureDisplay);
             panel_FrameDisplay.Controls.Add(pictureBox_FrameDisplay);
             string textureName = "";
             panel_XNA.AutoScroll = true;
 
-            _textureGame = new AnimationGame(pictureBox_TextureDisplay.Handle, this, pictureBox_TextureDisplay, new Vector2(pictureBox_TextureDisplay.Width, pictureBox_TextureDisplay.Height));
+            _textureGame = new TextureGame(pictureBox_TextureDisplay.Handle, this, pictureBox_TextureDisplay, new Vector2(pictureBox_TextureDisplay.Width, pictureBox_TextureDisplay.Height));
+            textureManager = new GraphicsManager(_textureGame.gameGraphics);
             pictureBox_TextureDisplay.Width = _textureGame.gameGraphics.GraphicsManager.PreferredBackBufferWidth;
             pictureBox_TextureDisplay.Height = _textureGame.gameGraphics.GraphicsManager.PreferredBackBufferHeight;
 
@@ -74,9 +83,10 @@ namespace AnimationEditor
                     switch (newAnimationNameWindow.DialogResult)
                     {
                         case DialogResult.OK:
-                            ReturnAnimation = new Animation(newAnimationNameWindow.ReturnName, "", 0, 1, 1, Vector2.Zero, Vector2.Zero, 1);
+                            ReturnAnimation = new Animation(newAnimationNameWindow.ReturnName, "", 0, 1, 1, Vector2.Zero,
+                                Vector2.Zero, 1);
                             txtBox_AnimationName.Text = ReturnAnimation.Name;
-                            SetAnimationFieldsToDefault();
+                            SetAnimationFields(ReturnAnimation);
                             return;
                         case DialogResult.Cancel:
                             Close();
@@ -108,20 +118,60 @@ namespace AnimationEditor
                     textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, texture.Width, texture.Height)));
                     _textureGame.gameGraphics.AddDrawable(textureAnimation);
                 }
+                _textureGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Texture, ReturnAnimation.Texture,Vector2.Zero, DrawnType.Animation));
+                DrawnRectangle frameRectangle = new DrawnRectangle
+                {
+                    Name = frameRectangleName,
+                    PositionX = 0,
+                    PositionY = 0,
+                    Size = new Size(0, 0),
+                    Thickness = 1,
+                    Color = GameGraphics.ConvertSystemColorToXNA(System.Drawing.Color.Fuchsia)
+                };
+                _textureGame.gameGraphics.AddDrawable(frameRectangle);
+                _textureGame.gameGraphics.AddToDrawList(new DrawParam(frameRectangleName, frameRectangleName,new Vector2(frameRectangle.PositionX, frameRectangle.PositionY), DrawnType.Shape));
+                FrameAction frameAction = new FrameAction
+                {
+                    Name = ReturnAnimation.Texture,
+                    Drawable = ReturnAnimation.Texture,
+                    Value = 1
+                };
+                StatusAction statusAction = new StatusAction
+                {
+                    Name = ReturnAnimation.Texture,
+                    Drawable = ReturnAnimation.Texture,
+                    Value = AnimationStatus.Paused
+                };
+                LoopAction loopActon = new LoopAction
+                {
+                    Name = ReturnAnimation.Texture,
+                    Drawable = ReturnAnimation.Texture,
+                    Value = true
+                };
+
+                textureManager.ExecuteAction(statusAction);
+                textureManager.ExecuteAction(frameAction);
+                textureManager.ExecuteAction(loopActon);
                 SetAnimationTexture(textureName);
             };
+            // This is here to prevent _textueGame from malfunctioning when tabbing through text fields. Not sure why, probably should look at that later.
             SendKeys.Send("{TAB}");
-            _textureGame.Run();
+            // TODO: Make actions to loop texture, will need to do so for setting a new texture.
+            
+
+             
+            Task task = Task.Run( () =>{_textureGame.Run();});
+            
 
         }
 
         private void OnClose(object sender, FormClosedEventArgs e)
         {
-            if (_textureGame.IsActive)
+            if (_textureGame != null && _textureGame.IsActive)
             {
                 _textureGame.CloseGame();    
             }
-            if (_frameGame.IsActive)
+            if (_frameGame != null && _frameGame.IsActive)
             {
                 _frameGame.CloseGame();
             }
@@ -140,7 +190,12 @@ namespace AnimationEditor
                 LoadFrameGame();
             }
             _frameGame.gameGraphics.ClearDrawList();
-            if (listBox_Frames.SelectedItem == null) return;
+            if (listBox_Frames.SelectedItem == null)
+            {
+                btn_SetFrame.Enabled = false;
+                return;
+            }
+            btn_SetFrame.Enabled = true;
             int selectedFrame = (int)listBox_Frames.SelectedItem;
             SetFieldsFromFrame(ReturnAnimation.Frames[selectedFrame]);
             lbl_FrameNumber.Text = selectedFrame.ToString();
@@ -152,7 +207,17 @@ namespace AnimationEditor
                 Vector2 center = GetCenter(new Vector2(((width)*ReturnAnimation.Scale),(height)*ReturnAnimation.Scale));
                 position = GetDrawPosition(new Vector2(panel_FrameDisplay.Width, panel_FrameDisplay.Height), center);
             }
-            _frameGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position,DrawnType.Animation));
+            if (!_frameGame.gameGraphics.DoesDrawableExist(ReturnAnimation.Name))
+            {
+                _frameGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position, DrawnType.Animation));    
+            }
+            else
+            {
+                _frameGame.gameGraphics.UpdateDrawPosition(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name,position, DrawnType.Animation));
+            }
+            Animation drawAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
+            drawAnimation.Frame = selectedFrame;
+            _frameGame.gameGraphics.SetLoadedDrawn(drawAnimation);
             FrameAction frameAction = new FrameAction
             {
                 Name = ReturnAnimation.Name,
@@ -165,15 +230,54 @@ namespace AnimationEditor
                 Drawable = ReturnAnimation.Name,
                 Value = AnimationStatus.Paused
             };
+            LoopAction loopActon = new LoopAction
+            {
+                Name = ReturnAnimation.Name,
+                Drawable = ReturnAnimation.Name,
+                Value = true
+            };
+            RectangleHeightAction rectangleHeightAction = new RectangleHeightAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = drawAnimation.Frames[selectedFrame].TextureSource.Height
+            };
+            RectangleWidthAction rectangleWidthAction = new RectangleWidthAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = drawAnimation.Frames[selectedFrame].TextureSource.Width
+            };
+            PositionXAction rectanglePositionXAction = new PositionXAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = drawAnimation.Frames[selectedFrame].TextureSource.X
+            };
+            PositionYAction rectanglePositionYAction = new PositionYAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = drawAnimation.Frames[selectedFrame].TextureSource.Y
+            };
 
+
+            
+            textureManager.ExecuteAction(rectanglePositionXAction);
+            textureManager.ExecuteAction(rectanglePositionYAction);
+            textureManager.ExecuteAction(rectangleWidthAction);
+            textureManager.ExecuteAction(rectangleHeightAction);
+            _textureGame.gameForm.Focus();
             animationManager.ExecuteAction(statusAction);
             animationManager.ExecuteAction(frameAction);
-
+            animationManager.ExecuteAction(loopActon);
+            _frameGame.gameForm.Focus();
         }
 
         private void LoadFrameGame()
         {
             _frameGame = new AnimationGame(pictureBox_FrameDisplay.Handle, this, pictureBox_FrameDisplay, new Vector2(pictureBox_FrameDisplay.Width, pictureBox_FrameDisplay.Height));
+            animationManager = new GraphicsManager(_frameGame.gameGraphics);
             pictureBox_TextureDisplay.Width = _frameGame.gameGraphics.GraphicsManager.PreferredBackBufferWidth;
             pictureBox_TextureDisplay.Height = _frameGame.gameGraphics.GraphicsManager.PreferredBackBufferHeight;
 
@@ -188,11 +292,15 @@ namespace AnimationEditor
                 {
                     _frameGame.gameGraphics.textureManager.Textures.Add(texture.Name, TextureManager.ConvertDataToTexture(texture, _frameGame.gameGraphics.GraphicsManager.GraphicsDevice));
                 }
-
             };
-
+            Vector2 position = Vector2.Zero;
+            if (ReturnAnimation.Frames[1].TextureSource.Width <= panel_FrameDisplay.Width || ReturnAnimation.Frames[1].TextureSource.Height <= panel_FrameDisplay.Height)
+            {
+                Vector2 center = GetCenter(new Vector2(((ReturnAnimation.Frames[1].TextureSource.Width) * ReturnAnimation.Scale), (ReturnAnimation.Frames[1].TextureSource.Height) * ReturnAnimation.Scale));
+                position = GetDrawPosition(new Vector2(panel_FrameDisplay.Width, panel_FrameDisplay.Height), center);
+            }
             _frameGame.gameGraphics.AddDrawable(ReturnAnimation);
-            animationManager = new GraphicsManager(_frameGame.gameGraphics);
+            _frameGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position,DrawnType.Animation));
             _frameGame.Run();
         }
 
@@ -215,12 +323,24 @@ namespace AnimationEditor
                 _frameGame.gameGraphics.SetLoadedDrawn(drawAnimation);
             }
             listBox_Frames.Items.Add(listBox_Frames.Items.Count + 1);
-            lbl_CurrentFrameCount.Text = ReturnAnimation.framecount.ToString();
+            lbl_CurrentFrameCount.Text = ReturnAnimation.FrameCount.ToString();
         }
         private bool RemoveFrame(int frame)
         {
-            if (frame > ReturnAnimation.framecount) return false;
+            if (frame > ReturnAnimation.FrameCount) return false;
+            if (_frameGame != null && _frameGame.gameGraphics.DoesDrawableExist(ReturnAnimation.Name))
+            {
+                Animation drawAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
+                drawAnimation.RemoveFrame(frame);
+                _frameGame.gameGraphics.SetLoadedDrawn(drawAnimation);
+            }
             listBox_Frames.Items.Remove(frame);
+            foreach (int currentFrame in listBox_Frames.Items.Cast<object>().Select(item => Int32.Parse(item.ToString())).Where(currentFrame => currentFrame > frame).ToList())
+            {
+                listBox_Frames.Items.Remove(currentFrame);
+                listBox_Frames.Items.Add(currentFrame - 1);
+            }
+            lbl_CurrentFrameCount.Text = ReturnAnimation.FrameCount.ToString();
             return ReturnAnimation.RemoveFrame(frame);
         }
 
@@ -232,11 +352,19 @@ namespace AnimationEditor
             txtBox_FrameHeight.Text = frame.TextureSource.Height.ToString();
         }
 
+        private delegate void SetTextCallBack(string text);
         private void SetAnimationTexture(string textureName)
         {
-            _textureGame.gameGraphics.ClearDrawList();
             _textureGame.gameGraphics.AddToDrawList(new DrawParam(textureName, textureName, new Vector2(0, 0), DrawnType.Animation));
-            lbl_TextureName.Text = textureName;
+            if (lbl_TextureName.InvokeRequired)
+            {
+                SetTextCallBack d = new SetTextCallBack(SetAnimationTexture);
+                this.BeginInvoke(d, new object[] {textureName});
+            }
+            else
+            {
+                lbl_TextureName.Text = textureName;    
+            }
         }
 
         private void SetAnimationFields(Animation animation)
@@ -245,6 +373,13 @@ namespace AnimationEditor
             txtBox_Depth.Text = animation.Depth.ToString();
             txtBox_Scale.Text = animation.Scale.ToString();
             txtBox_Speed.Text = animation.FramesPerSecond.ToString();
+            if (animation.FrameCount > 0)
+            {
+                for (int i = 1; 1 <= animation.FrameCount; i++)
+                {
+                    listBox_Frames.Items.Add(i);
+                }
+            }
         }
 
         private void btn_SetFrame_Click(object sender, EventArgs e)
@@ -256,16 +391,24 @@ namespace AnimationEditor
             int frame = Int32.Parse(lbl_FrameNumber.Text);
             Frame setFrame = new Frame(new GameRectangle(x, y, width, height));
             ReturnAnimation.SetFrame(frame, setFrame);
-            Animation drawnAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
-            drawnAnimation.SetFrame(frame, setFrame);
-            _frameGame.gameGraphics.SetLoadedDrawn(drawnAnimation);
             Vector2 position = Vector2.Zero;
             if (width <= panel_FrameDisplay.Width || height <= panel_FrameDisplay.Height)
             {
                 Vector2 center = GetCenter(new Vector2(((width)*ReturnAnimation.Scale),(height)*ReturnAnimation.Scale));
                 position = GetDrawPosition(new Vector2(panel_FrameDisplay.Width, panel_FrameDisplay.Height), center);
             }
-            _frameGame.gameGraphics.UpdateDrawPosition(new DrawParam(drawnAnimation.Name, drawnAnimation.Name, position,DrawnType.Animation));
+            if (_frameGame.gameGraphics.DoesDrawableExist(ReturnAnimation.Name))
+            {
+                Animation drawnAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
+                drawnAnimation.SetFrame(frame, setFrame);
+                _frameGame.gameGraphics.SetLoadedDrawn(drawnAnimation);
+            }
+            else
+            {
+                _frameGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Name,ReturnAnimation.Name, position, DrawnType.Animation));
+                return;
+            }
+            _frameGame.gameGraphics.UpdateDrawPosition(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position, DrawnType.Animation));
         }
         private Vector2 GetCenter(Vector2 box)
         {
@@ -275,6 +418,85 @@ namespace AnimationEditor
         private Vector2 GetDrawPosition(Vector2 boxLimits, Vector2 center)
         {
             return new Vector2((boxLimits.X / 2) - center.X, (boxLimits.Y / 2) - center.Y);
+        }
+
+        private void btn_Preview_Click(object sender, EventArgs e)
+        {
+            BinaryTexture texture = _binaryTextures.FirstOrDefault(t => t.Name == ReturnAnimation.Texture);
+            if (texture == null)
+            {
+                MessageBox.Show("Invalid texutre", "Invalid Texture", MessageBoxButtons.OK);
+                return;
+            }
+            PreviewAnimationWindow previewAnimation = new PreviewAnimationWindow(ReturnAnimation, texture);
+            previewAnimation.ShowDialog();
+        }
+
+        private void btn_RemoveFrame_Click(object sender, EventArgs e)
+        {
+            if (listBox_Frames.SelectedItem == null) return;
+            int selectedItem = Int32.Parse(listBox_Frames.SelectedItem.ToString());
+            RemoveFrame(selectedItem);
+            if (!_frameGameLoaded)
+            {
+                LoadFrameGame();
+            }
+        }
+
+        private void btn_SetAnimation_Click(object sender, EventArgs e)
+        {
+            ReturnAnimation.Scale = float.Parse(txtBox_Scale.Text);
+            ReturnAnimation.Depth = float.Parse(txtBox_Depth.Text);
+            ReturnAnimation.FramesPerSecond = Int32.Parse(txtBox_Speed.Text);
+            Animation drawAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
+            drawAnimation.Scale = float.Parse(txtBox_Scale.Text);
+            drawAnimation.Depth = float.Parse(txtBox_Depth.Text);
+            drawAnimation.FramesPerSecond = Int32.Parse(txtBox_Speed.Text);
+            _frameGame.gameGraphics.SetLoadedDrawn(drawAnimation);
+        }
+
+        private void btn_SetSpriteSheet_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_TestFrame_Click(object sender, EventArgs e)
+        {
+            int x = Int32.Parse(txtBox_FrameX.Text);
+            int y = Int32.Parse(txtBox_FrameY.Text);
+            int width = Int32.Parse(txtBox_FrameWidth.Text);
+            int height = Int32.Parse(txtBox_FrameHeight.Text);
+            RectangleHeightAction rectangleHeightAction = new RectangleHeightAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = height
+            };
+            RectangleWidthAction rectangleWidthAction = new RectangleWidthAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = width
+            };
+            PositionXAction rectanglePositionXAction = new PositionXAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = x
+            };
+            PositionYAction rectanglePositionYAction = new PositionYAction
+            {
+                Name = frameRectangleName,
+                Drawable = frameRectangleName,
+                Value = y
+            };
+
+
+            
+            textureManager.ExecuteAction(rectanglePositionXAction);
+            textureManager.ExecuteAction(rectanglePositionYAction);
+            textureManager.ExecuteAction(rectangleWidthAction);
+            textureManager.ExecuteAction(rectangleHeightAction);
         }
 
     }

@@ -70,6 +70,8 @@
             this.label_DisplayFrameCurrent = new System.Windows.Forms.Label();
             this.btn_Preview = new System.Windows.Forms.Button();
             this.btn_SetFrame = new System.Windows.Forms.Button();
+            this.btn_SetAnimation = new System.Windows.Forms.Button();
+            this.btn_TestFrame = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_TextureDisplay)).BeginInit();
             this.menuStrip_Main.SuspendLayout();
             this.panel_XNA.SuspendLayout();
@@ -92,7 +94,7 @@
             // listBox_Frames
             // 
             this.listBox_Frames.FormattingEnabled = true;
-            this.listBox_Frames.Location = new System.Drawing.Point(18, 80);
+            this.listBox_Frames.Location = new System.Drawing.Point(17, 58);
             this.listBox_Frames.Name = "listBox_Frames";
             this.listBox_Frames.Size = new System.Drawing.Size(70, 537);
             this.listBox_Frames.TabIndex = 2;
@@ -140,7 +142,7 @@
             // 
             this.lbl_AnimationName.AutoSize = true;
             this.lbl_AnimationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_AnimationName.Location = new System.Drawing.Point(159, 58);
+            this.lbl_AnimationName.Location = new System.Drawing.Point(160, 28);
             this.lbl_AnimationName.Name = "lbl_AnimationName";
             this.lbl_AnimationName.Size = new System.Drawing.Size(98, 13);
             this.lbl_AnimationName.TabIndex = 4;
@@ -148,7 +150,7 @@
             // 
             // txtBox_AnimationName
             // 
-            this.txtBox_AnimationName.Location = new System.Drawing.Point(103, 80);
+            this.txtBox_AnimationName.Location = new System.Drawing.Point(104, 50);
             this.txtBox_AnimationName.Name = "txtBox_AnimationName";
             this.txtBox_AnimationName.Size = new System.Drawing.Size(206, 20);
             this.txtBox_AnimationName.TabIndex = 5;
@@ -229,22 +231,26 @@
             // 
             // btn_AddFrame
             // 
-            this.btn_AddFrame.Location = new System.Drawing.Point(112, 226);
+            this.btn_AddFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.btn_AddFrame.Location = new System.Drawing.Point(17, 601);
             this.btn_AddFrame.Name = "btn_AddFrame";
-            this.btn_AddFrame.Size = new System.Drawing.Size(91, 23);
+            this.btn_AddFrame.Size = new System.Drawing.Size(27, 23);
             this.btn_AddFrame.TabIndex = 15;
-            this.btn_AddFrame.Text = "Add Frame";
+            this.btn_AddFrame.Text = "+";
             this.btn_AddFrame.UseVisualStyleBackColor = true;
             this.btn_AddFrame.Click += new System.EventHandler(this.btn_AddFrame_Click);
             // 
             // btn_RemoveFrame
             // 
-            this.btn_RemoveFrame.Location = new System.Drawing.Point(209, 226);
+            this.btn_RemoveFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.btn_RemoveFrame.Location = new System.Drawing.Point(60, 601);
             this.btn_RemoveFrame.Name = "btn_RemoveFrame";
-            this.btn_RemoveFrame.Size = new System.Drawing.Size(91, 23);
+            this.btn_RemoveFrame.Size = new System.Drawing.Size(27, 23);
             this.btn_RemoveFrame.TabIndex = 16;
-            this.btn_RemoveFrame.Text = "Remove Frame";
+            this.btn_RemoveFrame.Text = "-";
+            this.btn_RemoveFrame.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_RemoveFrame.UseVisualStyleBackColor = true;
+            this.btn_RemoveFrame.Click += new System.EventHandler(this.btn_RemoveFrame_Click);
             // 
             // panel_XNA
             // 
@@ -254,7 +260,7 @@
             this.panel_XNA.Location = new System.Drawing.Point(331, 57);
             this.panel_XNA.Name = "panel_XNA";
             this.panel_XNA.Size = new System.Drawing.Size(619, 271);
-            this.panel_XNA.TabIndex = 77;
+            this.panel_XNA.TabIndex = 1;
             this.panel_XNA.TabStop = true;
             // 
             // txtBox_Scale
@@ -328,7 +334,7 @@
             // 
             this.lbl_CurrentFrame.AutoSize = true;
             this.lbl_CurrentFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CurrentFrame.Location = new System.Drawing.Point(165, 356);
+            this.lbl_CurrentFrame.Location = new System.Drawing.Point(165, 335);
             this.lbl_CurrentFrame.Name = "lbl_CurrentFrame";
             this.lbl_CurrentFrame.Size = new System.Drawing.Size(86, 13);
             this.lbl_CurrentFrame.TabIndex = 26;
@@ -345,7 +351,7 @@
             this.panel_AnimationInformation.Controls.Add(this.txtBox_Speed);
             this.panel_AnimationInformation.Controls.Add(this.lbl_Scale);
             this.panel_AnimationInformation.Controls.Add(this.lbl_CurrentFrameCount);
-            this.panel_AnimationInformation.Location = new System.Drawing.Point(94, 106);
+            this.panel_AnimationInformation.Location = new System.Drawing.Point(95, 76);
             this.panel_AnimationInformation.Name = "panel_AnimationInformation";
             this.panel_AnimationInformation.Size = new System.Drawing.Size(228, 114);
             this.panel_AnimationInformation.TabIndex = 27;
@@ -363,7 +369,7 @@
             this.panel_CurrentFrameInformation.Controls.Add(this.lbl_Y);
             this.panel_CurrentFrameInformation.Controls.Add(this.lbl_Width);
             this.panel_CurrentFrameInformation.Controls.Add(this.lbl_Height);
-            this.panel_CurrentFrameInformation.Location = new System.Drawing.Point(100, 376);
+            this.panel_CurrentFrameInformation.Location = new System.Drawing.Point(100, 355);
             this.panel_CurrentFrameInformation.Name = "panel_CurrentFrameInformation";
             this.panel_CurrentFrameInformation.Size = new System.Drawing.Size(222, 135);
             this.panel_CurrentFrameInformation.TabIndex = 28;
@@ -403,12 +409,13 @@
             this.btn_SetSpriteSheet.TabIndex = 30;
             this.btn_SetSpriteSheet.Text = "Set Sprite Sheet";
             this.btn_SetSpriteSheet.UseVisualStyleBackColor = true;
+            this.btn_SetSpriteSheet.Click += new System.EventHandler(this.btn_SetSpriteSheet_Click);
             // 
             // lbl_Frames
             // 
             this.lbl_Frames.AutoSize = true;
             this.lbl_Frames.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Frames.Location = new System.Drawing.Point(29, 60);
+            this.lbl_Frames.Location = new System.Drawing.Point(28, 38);
             this.lbl_Frames.Name = "lbl_Frames";
             this.lbl_Frames.Size = new System.Drawing.Size(47, 13);
             this.lbl_Frames.TabIndex = 31;
@@ -445,16 +452,17 @@
             // 
             // btn_Preview
             // 
-            this.btn_Preview.Location = new System.Drawing.Point(162, 255);
+            this.btn_Preview.Location = new System.Drawing.Point(167, 224);
             this.btn_Preview.Name = "btn_Preview";
             this.btn_Preview.Size = new System.Drawing.Size(91, 23);
             this.btn_Preview.TabIndex = 34;
             this.btn_Preview.Text = "Preview";
             this.btn_Preview.UseVisualStyleBackColor = true;
+            this.btn_Preview.Click += new System.EventHandler(this.btn_Preview_Click);
             // 
             // btn_SetFrame
             // 
-            this.btn_SetFrame.Location = new System.Drawing.Point(168, 517);
+            this.btn_SetFrame.Location = new System.Drawing.Point(169, 497);
             this.btn_SetFrame.Name = "btn_SetFrame";
             this.btn_SetFrame.Size = new System.Drawing.Size(75, 23);
             this.btn_SetFrame.TabIndex = 35;
@@ -462,11 +470,33 @@
             this.btn_SetFrame.UseVisualStyleBackColor = true;
             this.btn_SetFrame.Click += new System.EventHandler(this.btn_SetFrame_Click);
             // 
+            // btn_SetAnimation
+            // 
+            this.btn_SetAnimation.Location = new System.Drawing.Point(157, 195);
+            this.btn_SetAnimation.Name = "btn_SetAnimation";
+            this.btn_SetAnimation.Size = new System.Drawing.Size(108, 23);
+            this.btn_SetAnimation.TabIndex = 78;
+            this.btn_SetAnimation.Text = "Set Animation";
+            this.btn_SetAnimation.UseVisualStyleBackColor = true;
+            this.btn_SetAnimation.Click += new System.EventHandler(this.btn_SetAnimation_Click);
+            // 
+            // btn_TestFrame
+            // 
+            this.btn_TestFrame.Location = new System.Drawing.Point(157, 555);
+            this.btn_TestFrame.Name = "btn_TestFrame";
+            this.btn_TestFrame.Size = new System.Drawing.Size(75, 23);
+            this.btn_TestFrame.TabIndex = 79;
+            this.btn_TestFrame.Text = "Test";
+            this.btn_TestFrame.UseVisualStyleBackColor = true;
+            this.btn_TestFrame.Click += new System.EventHandler(this.btn_TestFrame_Click);
+            // 
             // EditAnimationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 634);
+            this.ClientSize = new System.Drawing.Size(1020, 645);
+            this.Controls.Add(this.btn_TestFrame);
+            this.Controls.Add(this.btn_SetAnimation);
             this.Controls.Add(this.btn_SetFrame);
             this.Controls.Add(this.btn_Preview);
             this.Controls.Add(this.label_DisplayFrameCurrent);
@@ -475,18 +505,19 @@
             this.Controls.Add(this.btn_SetSpriteSheet);
             this.Controls.Add(this.lbl_TextureName);
             this.Controls.Add(this.lbl_CurrentFrame);
+            this.Controls.Add(this.btn_AddFrame);
             this.Controls.Add(this.panel_CurrentFrameInformation);
             this.Controls.Add(this.panel_AnimationInformation);
             this.Controls.Add(this.btn_RemoveFrame);
             this.Controls.Add(this.panel_XNA);
             this.Controls.Add(this.lbl_SpriteSheet);
-            this.Controls.Add(this.btn_AddFrame);
             this.Controls.Add(this.txtBox_AnimationName);
             this.Controls.Add(this.lbl_AnimationName);
             this.Controls.Add(this.listBox_Frames);
             this.Controls.Add(this.menuStrip_Main);
             this.MainMenuStrip = this.menuStrip_Main;
             this.Name = "EditAnimationWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New Animation";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);
             this.Shown += new System.EventHandler(this.OnShown_Window);
@@ -549,5 +580,7 @@
         private System.Windows.Forms.Label label_DisplayFrameCurrent;
         private System.Windows.Forms.Button btn_Preview;
         private System.Windows.Forms.Button btn_SetFrame;
+        private System.Windows.Forms.Button btn_SetAnimation;
+        private System.Windows.Forms.Button btn_TestFrame;
     }
 }

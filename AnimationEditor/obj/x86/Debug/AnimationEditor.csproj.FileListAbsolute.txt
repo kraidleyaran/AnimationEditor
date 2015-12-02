@@ -1,40 +1,3 @@
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.exe
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.pdb
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\Cyotek.Windows.Forms.ColorPicker.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GameGraphicsLib.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\MonoGame.Framework.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.MediaFoundation.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XAudio2.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D11.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.DXGI.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct2D1.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XInput.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.RawInput.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D9.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GameGraphicsLib.pdb
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\MonoGame.Framework.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.MediaFoundation.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XAudio2.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D11.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.DXGI.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct2D1.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XInput.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.RawInput.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D9.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.EditAnimationWindow.resources
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.MainWindow.resources
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.NewNameWindow.resources
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SetSpriteSheetWindow.resources
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SpriteSheetManagerWindow.resources
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csproj.GenerateResource.Cache
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.exe
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.pdb
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csprojResolveAssemblyReference.cache
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.exe.config
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GraphicsManagerLib.dll
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GraphicsManagerLib.pdb
 C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.exe.config
 C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.exe
 C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.pdb
@@ -72,3 +35,41 @@ C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\obj\
 C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csproj.GenerateResource.Cache
 C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.exe
 C:\Users\Alex\Documents\Old Documents\Stuff\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.exe.config
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.exe
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\AnimationEditor.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\Cyotek.Windows.Forms.ColorPicker.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GameGraphicsLib.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GraphicsManagerLib.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GameGraphicsLib.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GraphicsManagerLib.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.EditAnimationWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.MainWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.NewNameWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.PreviewAnimationWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SetSpriteSheetWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SpriteSheetManagerWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csproj.GenerateResource.Cache
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.exe
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.pdb

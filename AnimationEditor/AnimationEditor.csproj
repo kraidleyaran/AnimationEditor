@@ -62,6 +62,12 @@
     <Compile Include="NewNameWindow.Designer.cs">
       <DependentUpon>NewNameWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreviewAnimationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewAnimationWindow.Designer.cs">
+      <DependentUpon>PreviewAnimationWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetSpriteSheetWindow.cs">
@@ -76,6 +82,7 @@
     <Compile Include="SpriteManagerWindow.Designer.cs">
       <DependentUpon>SpriteManagerWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaticMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cyotek.Windows.Forms.ColorPicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
@@ -118,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewNameWindow.resx">
       <DependentUpon>NewNameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewAnimationWindow.resx">
+      <DependentUpon>PreviewAnimationWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetSpriteSheetWindow.resx">
       <DependentUpon>SetSpriteSheetWindow.cs</DependentUpon>
