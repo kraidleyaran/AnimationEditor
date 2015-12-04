@@ -159,8 +159,8 @@ namespace AnimationEditor
             // TODO: Make actions to loop texture, will need to do so for setting a new texture.
             
 
-             
-            Task task = Task.Run( () =>{_textureGame.Run();});
+             _textureGame.Run();
+            //Task task = Task.Run( () =>{_textureGame.Run();});
             
 
         }
@@ -236,38 +236,8 @@ namespace AnimationEditor
                 Drawable = ReturnAnimation.Name,
                 Value = true
             };
-            RectangleHeightAction rectangleHeightAction = new RectangleHeightAction
-            {
-                Name = frameRectangleName,
-                Drawable = frameRectangleName,
-                Value = drawAnimation.Frames[selectedFrame].TextureSource.Height
-            };
-            RectangleWidthAction rectangleWidthAction = new RectangleWidthAction
-            {
-                Name = frameRectangleName,
-                Drawable = frameRectangleName,
-                Value = drawAnimation.Frames[selectedFrame].TextureSource.Width
-            };
-            PositionXAction rectanglePositionXAction = new PositionXAction
-            {
-                Name = frameRectangleName,
-                Drawable = frameRectangleName,
-                Value = drawAnimation.Frames[selectedFrame].TextureSource.X
-            };
-            PositionYAction rectanglePositionYAction = new PositionYAction
-            {
-                Name = frameRectangleName,
-                Drawable = frameRectangleName,
-                Value = drawAnimation.Frames[selectedFrame].TextureSource.Y
-            };
+            SetFrameData();
 
-
-            
-            textureManager.ExecuteAction(rectanglePositionXAction);
-            textureManager.ExecuteAction(rectanglePositionYAction);
-            textureManager.ExecuteAction(rectangleWidthAction);
-            textureManager.ExecuteAction(rectangleHeightAction);
-            _textureGame.gameForm.Focus();
             animationManager.ExecuteAction(statusAction);
             animationManager.ExecuteAction(frameAction);
             animationManager.ExecuteAction(loopActon);
@@ -384,31 +354,7 @@ namespace AnimationEditor
 
         private void btn_SetFrame_Click(object sender, EventArgs e)
         {
-            int x = Int32.Parse(txtBox_FrameX.Text);
-            int y = Int32.Parse(txtBox_FrameY.Text);
-            int width = Int32.Parse(txtBox_FrameWidth.Text);
-            int height = Int32.Parse(txtBox_FrameHeight.Text);
-            int frame = Int32.Parse(lbl_FrameNumber.Text);
-            Frame setFrame = new Frame(new GameRectangle(x, y, width, height));
-            ReturnAnimation.SetFrame(frame, setFrame);
-            Vector2 position = Vector2.Zero;
-            if (width <= panel_FrameDisplay.Width || height <= panel_FrameDisplay.Height)
-            {
-                Vector2 center = GetCenter(new Vector2(((width)*ReturnAnimation.Scale),(height)*ReturnAnimation.Scale));
-                position = GetDrawPosition(new Vector2(panel_FrameDisplay.Width, panel_FrameDisplay.Height), center);
-            }
-            if (_frameGame.gameGraphics.DoesDrawableExist(ReturnAnimation.Name))
-            {
-                Animation drawnAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
-                drawnAnimation.SetFrame(frame, setFrame);
-                _frameGame.gameGraphics.SetLoadedDrawn(drawnAnimation);
-            }
-            else
-            {
-                _frameGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Name,ReturnAnimation.Name, position, DrawnType.Animation));
-                return;
-            }
-            _frameGame.gameGraphics.UpdateDrawPosition(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position, DrawnType.Animation));
+            SetFrameData();
         }
         private Vector2 GetCenter(Vector2 box)
         {
@@ -460,12 +406,34 @@ namespace AnimationEditor
 
         }
 
-        private void btn_TestFrame_Click(object sender, EventArgs e)
+        private void SetFrameData()
         {
             int x = Int32.Parse(txtBox_FrameX.Text);
             int y = Int32.Parse(txtBox_FrameY.Text);
             int width = Int32.Parse(txtBox_FrameWidth.Text);
             int height = Int32.Parse(txtBox_FrameHeight.Text);
+            int frame = Int32.Parse(lbl_FrameNumber.Text);
+            Frame setFrame = new Frame(new GameRectangle(x, y, width, height));
+            ReturnAnimation.SetFrame(frame, setFrame);
+            Vector2 position = Vector2.Zero;
+            if (width <= panel_FrameDisplay.Width || height <= panel_FrameDisplay.Height)
+            {
+                Vector2 center = GetCenter(new Vector2(((width) * ReturnAnimation.Scale), (height) * ReturnAnimation.Scale));
+                position = GetDrawPosition(new Vector2(panel_FrameDisplay.Width, panel_FrameDisplay.Height), center);
+            }
+            if (_frameGame.gameGraphics.DoesDrawableExist(ReturnAnimation.Name))
+            {
+                Animation drawnAnimation = _frameGame.gameGraphics.GetDrawAnimation(ReturnAnimation.Name);
+                drawnAnimation.SetFrame(frame, setFrame);
+                _frameGame.gameGraphics.SetLoadedDrawn(drawnAnimation);
+            }
+            else
+            {
+                _frameGame.gameGraphics.AddToDrawList(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position, DrawnType.Animation));
+                return;
+            }
+            _frameGame.gameGraphics.UpdateDrawPosition(new DrawParam(ReturnAnimation.Name, ReturnAnimation.Name, position, DrawnType.Animation));
+
             RectangleHeightAction rectangleHeightAction = new RectangleHeightAction
             {
                 Name = frameRectangleName,
@@ -492,11 +460,17 @@ namespace AnimationEditor
             };
 
 
-            
+
             textureManager.ExecuteAction(rectanglePositionXAction);
             textureManager.ExecuteAction(rectanglePositionYAction);
             textureManager.ExecuteAction(rectangleWidthAction);
             textureManager.ExecuteAction(rectangleHeightAction);
+            _textureGame.RunOneFrame();
+        }
+
+        private void btn_TestFrame_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
