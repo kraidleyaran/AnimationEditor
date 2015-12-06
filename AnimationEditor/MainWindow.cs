@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
+using FileDialogLib;
+using FileDialogLib.Objects;
+using GameArchiveLib;
 using GameGraphicsLib;
 using GraphicsManagerLib;
 using GraphicsManagerLib.Actions.AnimationAction;
@@ -18,8 +21,16 @@ namespace AnimationEditor
     public partial class MainWindow : Form
     {
         private List<BinaryTexture> binaryTextures;
+        
         private string SelectedAnimation = "";
+        
+        private bool fileLoaded = false;
+        private string filePath = "";
+        private bool fileChanged = false;
+
+        private GameArchive gameArchive = GameArchive.Instance;
         public GraphicsManager graphicsManager;
+        private GameFileDialog gameFileDialog = new GameFileDialog();
         public MainWindow()
         {
             InitializeComponent();
@@ -42,12 +53,14 @@ namespace AnimationEditor
                 Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
                 binaryTextures.Add(pair.Value);
             }
+            fileChanged = true;
         } 
 
         public AnimationGame Game { get; set; }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (fileChanged)
             Game.CloseGame();
         }
 
@@ -59,6 +72,7 @@ namespace AnimationEditor
                 case DialogResult.OK:
                     Game.gameGraphics.AddDrawable(animationWindow.ReturnAnimation);
                     listBox_Animations.Items.Add(animationWindow.ReturnAnimation.Name);
+                    fileChanged = true;
                     break;
                 case DialogResult.Cancel:
                     return;
@@ -90,6 +104,7 @@ namespace AnimationEditor
                     }
                     Game.gameGraphics.SetDrawable(animationWindow.ReturnAnimation);
                     Game.gameGraphics.SetLoadedDrawn(animationWindow.ReturnAnimation, animationWindow.ReturnAnimation.Name);
+                    fileChanged = true;
                     break;
                 case DialogResult.Cancel:
                     return;
@@ -133,6 +148,71 @@ namespace AnimationEditor
             Game.gameGraphics.RemoveFromDrawList(SelectedAnimation);
             Game.gameGraphics.RemoveDrawable(SelectedAnimation);
             listBox_Animations.Items.Remove(SelectedAnimation);
+        }
+
+        private void saveAndExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!fileLoaded)
+            {
+                SaveAs();
+                return;
+            }
+            gameArchive.SaveData(Game.gameGraphics.SaveData(), filePath);
+            fileChanged = false;
+            Close();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Response response = SaveAs();
+            filePath = response.DirectoryPath;
+        }
+
+        private Response SaveAs()
+        {
+            Response response = gameFileDialog.SaveFile<GraphicsData>(Game.gameGraphics.SaveData(), "ggcd", "Graphics");
+            if (response.ValidData)
+            {
+                MessageBox.Show("File succesfuly saved", "File saved", MessageBoxButtons.OK);
+            }
+            fileChanged = false;
+            return response;
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Response response = gameFileDialog.LoadFile<GraphicsData>("ggcd", "Graphics");
+            if (!response.ValidData) return;
+            
+            LoadGraphicsData((GraphicsData)response.Data);
+            filePath = response.DirectoryPath;
+            MessageBox.Show("File succesfully loaded", "File loadead", MessageBoxButtons.OK);
+        }
+
+        private void LoadGraphicsData(GraphicsData data)
+        {
+            foreach (BinaryTexture texture in data.AnimationTextures)
+            {
+                Game.gameGraphics.textureManager.ClearAllTextures();
+                Game.gameGraphics.AddTexture(texture.Name,TextureManager.ConvertDataToTexture(texture, Game.gameGraphics.GraphicsManager.GraphicsDevice));
+            }
+            listBox_Animations.Items.Clear();
+            foreach (IDrawn drawObject in data.DrawnObjects)
+            {
+                switch (drawObject.DrawnType)
+                {
+                    case DrawnType.Animation:
+                        Game.gameGraphics.ClearAnimationList();
+                        Game.gameGraphics.AddDrawable(drawObject);
+                        listBox_Animations.Items.Add(drawObject.Name);
+                        break;
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

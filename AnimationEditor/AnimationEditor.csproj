@@ -101,6 +101,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtrenalRefs\Cyotek.Windows.Forms.ColorPicker.dll</HintPath>
     </Reference>
+    <Reference Include="FileDialogLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExtrenalRefs\FileDialogLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GameArchiveLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExtrenalRefs\GameArchiveLib.dll</HintPath>
+    </Reference>
     <Reference Include="GameGraphicsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtrenalRefs\GameGraphicsLib.dll</HintPath>
@@ -120,12 +128,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ExtrenalRefs\Cyotek.Windows.Forms.ColorPicker.dll" />
+    <Content Include="ExtrenalRefs\FileDialogLib.dll" />
+    <Content Include="ExtrenalRefs\FileDialogLib.pdb" />
+    <Content Include="ExtrenalRefs\GameArchiveLib.dll" />
+    <Content Include="ExtrenalRefs\GameArchiveLib.pdb" />
     <Content Include="ExtrenalRefs\GameGraphicsLib.dll" />
     <Content Include="ExtrenalRefs\GameGraphicsLib.pdb" />
     <Content Include="ExtrenalRefs\GameInputLibrary.dll" />
     <Content Include="ExtrenalRefs\GraphicsManagerLib.dll" />
     <Content Include="ExtrenalRefs\GraphicsManagerLib.pdb" />
     <Content Include="ExtrenalRefs\InputManagerLib.dll" />
+    <Content Include="GameArchiveLib.dll" />
+    <Content Include="GameArchiveLib.pdb" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
