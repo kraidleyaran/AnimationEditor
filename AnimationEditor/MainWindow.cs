@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
 using GameGraphicsLib;
+using GraphicsManagerLib;
+using GraphicsManagerLib.Actions.AnimationAction;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,10 +18,14 @@ namespace AnimationEditor
     public partial class MainWindow : Form
     {
         private List<BinaryTexture> binaryTextures;
+        private string SelectedAnimation = "";
+        public GraphicsManager graphicsManager;
         public MainWindow()
         {
             InitializeComponent();
             binaryTextures = new List<BinaryTexture>();
+            btn_Delete.Enabled = false;
+            btn_Edit.Enabled = false;
         }
 
         private void spriteSheetManagerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -34,27 +40,99 @@ namespace AnimationEditor
             foreach (KeyValuePair<string, BinaryTexture> pair in spriteManagerWindow.ReturnTextures)
             {
                 Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
-
                 binaryTextures.Add(pair.Value);
             }
         } 
 
-        public TextureGame Game { get; set; }
+        public AnimationGame Game { get; set; }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             Game.CloseGame();
         }
 
-        private void animationEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btn_NewAnimation_Click(object sender, EventArgs e)
         {
+            EditAnimationWindow animationWindow = new EditAnimationWindow(binaryTextures,Game.gameGraphics.GetDrawnNames());
+            switch (animationWindow.ShowDialog())
+            {
+                case DialogResult.OK:
+                    Game.gameGraphics.AddDrawable(animationWindow.ReturnAnimation);
+                    listBox_Animations.Items.Add(animationWindow.ReturnAnimation.Name);
+                    break;
+                case DialogResult.Cancel:
+                    return;
+            }
+        }
+
+        private void MainWindow_MouseHover(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_Edit_Click(object sender, EventArgs e)
+        {
+            if (listBox_Animations.SelectedItem == null)
+            {
+                MessageBox.Show("Must have an animation selected", "No Animation Selected", MessageBoxButtons.OK);
+                return;
+            }
+            Animation animation = Game.gameGraphics.GetAnimation(SelectedAnimation);
+            EditAnimationWindow animationWindow = new EditAnimationWindow(binaryTextures, Game.gameGraphics.GetDrawnNames(), animation);
+            switch (animationWindow.ShowDialog())
+            {
+                case DialogResult.OK:
+                    if (string.IsNullOrEmpty(SelectedAnimation)) return;
+                    if (SelectedAnimation == animationWindow.ReturnAnimation.Name)
+                    {
+                        listBox_Animations.SelectedItem = null;
+                        Game.gameGraphics.ClearDrawList();
+                    }
+                    Game.gameGraphics.SetDrawable(animationWindow.ReturnAnimation);
+                    Game.gameGraphics.SetLoadedDrawn(animationWindow.ReturnAnimation, animationWindow.ReturnAnimation.Name);
+                    break;
+                case DialogResult.Cancel:
+                    return;
+            }
 
         }
 
-        private void btn_NewAnimation_Click(object sender, EventArgs e)
+        private void listBox_Animations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            EditAnimationWindow animationWindow = new EditAnimationWindow(binaryTextures, Game.gameGraphics.GetDrawnNames());
-            animationWindow.ShowDialog();
+            if (listBox_Animations.SelectedItem == null)
+            {
+                btn_Delete.Enabled = false;
+                btn_Edit.Enabled = false;
+                return;
+            }
+            btn_Delete.Enabled = true;
+            btn_Edit.Enabled = true;
+            SelectedAnimation = listBox_Animations.SelectedItem.ToString();
+            Animation animation = Game.gameGraphics.GetAnimation(SelectedAnimation);
+            if (animation.FrameCount > 0)
+            {
+                Vector2 center = StaticMethods.GetCenter(new Vector2(animation.Frames[1].TextureSource.Width, animation.Frames[1].TextureSource.Height));
+                Vector2 position = StaticMethods.GetDrawPosition(new Vector2(panel_AnimationPreview.Width, panel_AnimationPreview.Height), center);
+                Game.gameGraphics.ClearDrawList();
+                Game.gameGraphics.AddToDrawList(new DrawParam(SelectedAnimation, SelectedAnimation, position, DrawnType.Animation));
+                LoopAction loopAction = new LoopAction
+                {
+                    Name = "Loop current animation",
+                    Drawable = animation.Name,
+                    Value = true
+                };
+                graphicsManager.ExecuteAction(loopAction);  
+            }
+
+
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            if (listBox_Animations.SelectedItem == null) return;
+            Game.gameGraphics.RemoveFromDrawList(SelectedAnimation);
+            Game.gameGraphics.RemoveDrawable(SelectedAnimation);
+            listBox_Animations.Items.Remove(SelectedAnimation);
         }
     }
 }

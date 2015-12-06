@@ -65,9 +65,11 @@ C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEdi
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csprojResolveAssemblyReference.cache
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.EditAnimationWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.GridFrameTool.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.MainWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.NewNameWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.PreviewAnimationWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SetFrameNumber.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SetSpriteSheetWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.SpriteSheetManagerWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.csproj.GenerateResource.Cache

@@ -14,8 +14,8 @@ namespace AnimationEditor.GameClasses
         public GameGraphics gameGraphics;
         public Control gameForm;
         public IntPtr DrawingSurface;
-        private Form ParentForm;
-        private PictureBox PictureBox;
+        public Form ParentForm;
+        public PictureBox PictureBox;
 
         public AnimationGame(IntPtr drawingSurface, Form parentForm, PictureBox pictureBox, Vector2 size)
         {

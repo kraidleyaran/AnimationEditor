@@ -16,8 +16,9 @@ namespace AnimationEditor.GameClasses
         public IntPtr DrawingSurface;
         private Form ParentForm;
         private PictureBox PictureBox;
+        private Label StateLabel;
 
-        public TextureGame(IntPtr drawingSurface, Form parentForm, PictureBox pictureBox, Vector2 size)
+        public TextureGame(IntPtr drawingSurface, Form parentForm, PictureBox pictureBox, Vector2 size, Label stateLabel)
         {
             DrawingSurface = drawingSurface;
             ParentForm = parentForm;
@@ -40,6 +41,7 @@ namespace AnimationEditor.GameClasses
                 
             };
             BackgroundColor = Color.CornflowerBlue;
+            StateLabel = stateLabel;
 
         }
 
@@ -108,6 +110,7 @@ namespace AnimationEditor.GameClasses
                 Exit();
             // TODO: Add your update logic here
             gameGraphics.Update(gameTime);
+            SetMouseState();
             base.Update(gameTime);
         }
 
@@ -141,6 +144,24 @@ namespace AnimationEditor.GameClasses
             this.Exit();
             //this.Dispose();
             //this.gameForm.Dispose();
+        }
+
+        public void SetMouseState()
+        {
+            System.Drawing.Point point = PictureBox.PointToClient(Control.MousePosition);
+            //Mouse.SetPosition(point.X, point.Y);
+            //MouseState state = Mouse.GetState();
+            int x = point.X;
+            int y = point.Y;
+            if (x <= 0)
+            {
+                x = 0;
+            }
+            if (y <= 0)
+            {
+                y = 0;
+            }
+            StateLabel.Text = string.Format("{0}, {1}", x, y);
         }
     }
 }

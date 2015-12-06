@@ -30,6 +30,7 @@ namespace AnimationEditor
             {
                 ReturnTextures.Add(texture.Name, texture);
             }
+            DisableFields();
 
         }
         
@@ -43,7 +44,7 @@ namespace AnimationEditor
         {
             panel_SpriteSheetPreview.AutoScroll = true;
 
-            this.Game = new TextureGame(this.pictureBox_SpriteSheetPreview.Handle, this, this.pictureBox_SpriteSheetPreview, new Vector2(this.pictureBox_SpriteSheetPreview.Width, this.pictureBox_SpriteSheetPreview.Height));
+            this.Game = new TextureGame(this.pictureBox_SpriteSheetPreview.Handle, this, this.pictureBox_SpriteSheetPreview, new Vector2(this.pictureBox_SpriteSheetPreview.Width, this.pictureBox_SpriteSheetPreview.Height), lbl_MouseState);
             graphicsManager = new GraphicsManager(Game.gameGraphics);
 
             pictureBox_SpriteSheetPreview.Width = Game.gameGraphics.GraphicsManager.PreferredBackBufferWidth;
@@ -104,7 +105,8 @@ namespace AnimationEditor
                     if (newTexture != null)
                     {
                         List<string> textureNames = Game.gameGraphics.textureManager.Textures.Keys.ToList();
-                        NewNameWindow spriteSheetName = new NewNameWindow(textureNames, "Sprite Sheet");
+                        string defaultName = getImage.SafeFileName.Remove(getImage.SafeFileName.Length - 4);
+                        NewNameWindow spriteSheetName = new NewNameWindow(textureNames, "Sprite Sheet", defaultName);
                         spriteSheetName.ShowDialog();
                         switch (spriteSheetName.DialogResult)
                         {
@@ -158,15 +160,19 @@ namespace AnimationEditor
 
         private void listBox_SpriteSheets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox_SpriteSheets.SelectedItem == null) return;
-            
+            if (listBox_SpriteSheets.SelectedItem == null)
+            {
+                DisableFields();
+                return;
+            }
+            EnableFields();
             Game.gameGraphics.ClearDrawList();
             
             panel_SpriteSheetPreview.AutoScroll = true;
             
-            string selectedItem = listBox_SpriteSheets.SelectedItem.ToString();
-            int height = Game.gameGraphics.textureManager.Textures[selectedItem].Height;
-            int width = Game.gameGraphics.textureManager.Textures[selectedItem].Width;
+            string textureName = listBox_SpriteSheets.SelectedItem.ToString();
+            int height = Game.gameGraphics.textureManager.Textures[textureName].Height;
+            int width = Game.gameGraphics.textureManager.Textures[textureName].Width;
             Game.SetGameHeight(height);
             Game.SetGameWidth(width);
             panel_SpriteSheetPreview.AutoScrollMinSize = new Size(Game.gameGraphics.textureManager.Textures[listBox_SpriteSheets.SelectedItem.ToString()].Width, Game.gameGraphics.textureManager.Textures[listBox_SpriteSheets.SelectedItem.ToString()].Height);
@@ -174,18 +180,18 @@ namespace AnimationEditor
 
             lbl_HeightValue.Text = height.ToString();
             lbl_WidthValue.Text = width.ToString();
-            txtBox_SheetName.Text = selectedItem;
+            txtBox_SheetName.Text = textureName;
 
 
-            Game.gameGraphics.AddToDrawList(new DrawParam(selectedItem, selectedItem, new Vector2(0, 0), DrawnType.Animation));
+            Game.gameGraphics.AddToDrawList(new DrawParam(textureName, textureName, new Vector2(0, 0), DrawnType.Animation));
             LoopAction loopAnimation = new LoopAction
             {
-                Name = "loop " + selectedItem,
-                Drawable = selectedItem,
+                Name = "loop " + textureName,
+                Drawable = textureName,
                 Value = true
             };
             graphicsManager.ExecuteAction(loopAnimation);
-            selectedTexture = Game.gameGraphics.textureManager.Textures[selectedItem];
+            selectedTexture = Game.gameGraphics.textureManager.Textures[textureName];
         }
 
         private void btn_TransparentColor_Click(object sender, EventArgs e)
@@ -218,6 +224,7 @@ namespace AnimationEditor
             }
         }
 
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -243,6 +250,33 @@ namespace AnimationEditor
                 Game.gameGraphics.textureManager.Textures[selectedTexture.Name] = selectedTexture;
             }
             
+        }
+
+        private void DisableFields()
+        {
+            btn_Delete.Enabled = false;
+            btn_SetTransparentColor.Enabled = false;
+            btn_LoadImage.Enabled = false;
+            txtBox_SheetName.Enabled = false;
+            btn_Save.Enabled = false;
+        }
+
+        private void EnableFields()
+        {
+            btn_Delete.Enabled = true;
+            btn_SetTransparentColor.Enabled = true;
+            btn_LoadImage.Enabled = true;
+            txtBox_SheetName.Enabled = true;
+            btn_Save.Enabled = true;
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            if (listBox_SpriteSheets.SelectedItem == null) return;
+            Game.gameGraphics.ClearDrawList();
+            Game.gameGraphics.RemoveDrawable(selectedTexture.Name);
+            Game.gameGraphics.textureManager.Textures.Remove(selectedTexture.Name);
+            listBox_SpriteSheets.Items.Remove(selectedTexture.Name);
         }
     }
 }

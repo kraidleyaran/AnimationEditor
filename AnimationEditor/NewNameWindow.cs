@@ -13,6 +13,15 @@ namespace AnimationEditor
     {
         private List<string> _currentNames;
         private string _objectTypeName;
+        public NewNameWindow(List<string> currentNames, string objectTypeName, string defaultName)
+        {
+            InitializeComponent();
+            _currentNames = currentNames;
+            _objectTypeName = objectTypeName;
+            Text = _objectTypeName + " Name";
+            lbl_EnterName.Text = "Enter " + _objectTypeName + " name";
+            txtBox_Name.Text = defaultName;
+        }
         public NewNameWindow(List<string> currentNames, string objectTypeName)
         {
             InitializeComponent();

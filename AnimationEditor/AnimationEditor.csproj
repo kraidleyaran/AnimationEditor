@@ -50,6 +50,12 @@
       <DependentUpon>EditAnimationWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="GameClasses\TextureGame.cs" />
+    <Compile Include="GridFrameTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GridFrameTool.Designer.cs">
+      <DependentUpon>GridFrameTool.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetFrameNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetFrameNumber.Designer.cs">
+      <DependentUpon>SetFrameNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetSpriteSheetWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +132,9 @@
     <EmbeddedResource Include="EditAnimationWindow.resx">
       <DependentUpon>EditAnimationWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GridFrameTool.resx">
+      <DependentUpon>GridFrameTool.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PreviewAnimationWindow.resx">
       <DependentUpon>PreviewAnimationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetFrameNumber.resx">
+      <DependentUpon>SetFrameNumber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetSpriteSheetWindow.resx">
       <DependentUpon>SetSpriteSheetWindow.cs</DependentUpon>
