@@ -62,6 +62,7 @@ namespace AnimationEditor
         {
             if (fileChanged)
             Game.CloseGame();
+            this.Dispose();
         }
 
         private void btn_NewAnimation_Click(object sender, EventArgs e)
