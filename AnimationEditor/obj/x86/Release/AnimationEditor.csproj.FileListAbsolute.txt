@@ -1,5 +1,3 @@
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.exe.config
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.exe
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.pdb
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\Cyotek.Windows.Forms.ColorPicker.dll
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\FileDialogLib.dll
@@ -30,7 +28,6 @@ C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEdi
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\SharpDX.XInput.xml
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\SharpDX.RawInput.xml
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\SharpDX.Direct3D9.xml
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.csprojResolveAssemblyReference.cache
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.EditAnimationWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.GridFrameTool.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.MainWindow.resources
@@ -40,5 +37,8 @@ C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEdi
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.SetSpriteSheetWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.SpriteSheetManagerWindow.resources
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.csproj.GenerateResource.Cache
-C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.exe
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.exe.config
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.exe
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.exe

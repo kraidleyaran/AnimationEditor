@@ -25,17 +25,7 @@ namespace AnimationEditor
             Application.SetCompatibleTextRenderingDefault(false);
             using (MainWindow mainWindow = new MainWindow())
             {
-                mainWindow.Shown += delegate(object sender, EventArgs args)
-                {
-                    mainWindow.Game = new AnimationGame(mainWindow.picBox_AnimationPreview.Handle, mainWindow, mainWindow.picBox_AnimationPreview, new Vector2(0, 0));
-                    mainWindow.Game.gameGraphics.GraphicsManager.DeviceCreated += delegate(object gsender, EventArgs gargs)
-                    {
-                        mainWindow.graphicsManager = new GraphicsManager(mainWindow.Game.gameGraphics);
-                    };
-                    mainWindow.Game.Run();
-                };
                 Application.Run(mainWindow);
-
             }
         }
     }

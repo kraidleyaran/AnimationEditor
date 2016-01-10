@@ -41,6 +41,9 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="GameClasses\AnimationGame.cs" />
     <Compile Include="EditAnimationWindow.cs">

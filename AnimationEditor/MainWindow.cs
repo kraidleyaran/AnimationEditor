@@ -215,5 +215,15 @@ namespace AnimationEditor
         {
             Close();
         }
+
+        private void MainWindow_Shown(object sender, EventArgs e)
+        {
+            Game = new AnimationGame(picBox_AnimationPreview.Handle, this, picBox_AnimationPreview, new Vector2(0, 0));
+            Game.gameGraphics.GraphicsManager.DeviceCreated += delegate(object gsender, EventArgs gargs)
+            {
+                graphicsManager = new GraphicsManager(Game.gameGraphics);
+            };
+            Game.Run();
+        }
     }
 }

@@ -22,7 +22,6 @@ namespace AnimationEditor.GameClasses
             DrawingSurface = drawingSurface;
             ParentForm = parentForm;
             PictureBox = pictureBox;
-
             gameGraphics = new GameGraphics(this);
             int width = 0;
             int height = 0;

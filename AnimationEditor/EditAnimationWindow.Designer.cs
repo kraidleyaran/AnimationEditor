@@ -32,6 +32,8 @@
             this.listBox_Frames = new System.Windows.Forms.ListBox();
             this.menuStrip_Main = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAndExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_AnimationName = new System.Windows.Forms.Label();
             this.txtBox_AnimationName = new System.Windows.Forms.TextBox();
             this.txtBox_FrameX = new System.Windows.Forms.TextBox();
@@ -61,6 +63,7 @@
             this.lbl_DefaultWidth = new System.Windows.Forms.Label();
             this.lbl_DefaultHeight = new System.Windows.Forms.Label();
             this.panel_CurrentFrameInformation = new System.Windows.Forms.Panel();
+            this.btn_SetFrameNumber = new System.Windows.Forms.Button();
             this.lbl_FrameNumber = new System.Windows.Forms.Label();
             this.lbl_Frame = new System.Windows.Forms.Label();
             this.lbl_TextureName = new System.Windows.Forms.Label();
@@ -79,9 +82,6 @@
             this.lbl_MouseState = new System.Windows.Forms.Label();
             this.lbl_MousePositionLabel = new System.Windows.Forms.Label();
             this.btn_FrameColor = new System.Windows.Forms.Button();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_SetFrameNumber = new System.Windows.Forms.Button();
-            this.saveAndExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_SaveAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_TextureDisplay)).BeginInit();
             this.menuStrip_Main.SuspendLayout();
@@ -118,7 +118,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip_Main.Location = new System.Drawing.Point(0, 0);
             this.menuStrip_Main.Name = "menuStrip_Main";
-            this.menuStrip_Main.Size = new System.Drawing.Size(1020, 24);
+            this.menuStrip_Main.Size = new System.Drawing.Size(1027, 24);
             this.menuStrip_Main.TabIndex = 3;
             this.menuStrip_Main.Text = "menuStrip1";
             // 
@@ -130,6 +130,20 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveAndExitToolStripMenuItem
+            // 
+            this.saveAndExitToolStripMenuItem.Name = "saveAndExitToolStripMenuItem";
+            this.saveAndExitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.saveAndExitToolStripMenuItem.Text = "Save and Exit";
+            this.saveAndExitToolStripMenuItem.Click += new System.EventHandler(this.saveAndExitToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // lbl_AnimationName
             // 
@@ -413,6 +427,16 @@
             this.panel_CurrentFrameInformation.Size = new System.Drawing.Size(222, 135);
             this.panel_CurrentFrameInformation.TabIndex = 28;
             // 
+            // btn_SetFrameNumber
+            // 
+            this.btn_SetFrameNumber.Location = new System.Drawing.Point(176, 4);
+            this.btn_SetFrameNumber.Name = "btn_SetFrameNumber";
+            this.btn_SetFrameNumber.Size = new System.Drawing.Size(33, 23);
+            this.btn_SetFrameNumber.TabIndex = 16;
+            this.btn_SetFrameNumber.Text = "Set";
+            this.btn_SetFrameNumber.UseVisualStyleBackColor = true;
+            this.btn_SetFrameNumber.Click += new System.EventHandler(this.btn_SetFrameNumber_Click);
+            // 
             // lbl_FrameNumber
             // 
             this.lbl_FrameNumber.AutoSize = true;
@@ -592,30 +616,6 @@
             this.btn_FrameColor.UseVisualStyleBackColor = true;
             this.btn_FrameColor.Click += new System.EventHandler(this.btn_FrameColor_Click);
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // btn_SetFrameNumber
-            // 
-            this.btn_SetFrameNumber.Location = new System.Drawing.Point(176, 4);
-            this.btn_SetFrameNumber.Name = "btn_SetFrameNumber";
-            this.btn_SetFrameNumber.Size = new System.Drawing.Size(33, 23);
-            this.btn_SetFrameNumber.TabIndex = 16;
-            this.btn_SetFrameNumber.Text = "Set";
-            this.btn_SetFrameNumber.UseVisualStyleBackColor = true;
-            this.btn_SetFrameNumber.Click += new System.EventHandler(this.btn_SetFrameNumber_Click);
-            // 
-            // saveAndExitToolStripMenuItem
-            // 
-            this.saveAndExitToolStripMenuItem.Name = "saveAndExitToolStripMenuItem";
-            this.saveAndExitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveAndExitToolStripMenuItem.Text = "Save and Exit";
-            this.saveAndExitToolStripMenuItem.Click += new System.EventHandler(this.saveAndExitToolStripMenuItem_Click);
-            // 
             // btn_SaveAll
             // 
             this.btn_SaveAll.Location = new System.Drawing.Point(172, 0);
@@ -631,7 +631,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 698);
+            this.ClientSize = new System.Drawing.Size(1027, 698);
             this.Controls.Add(this.btn_SaveAll);
             this.Controls.Add(this.btn_FrameColor);
             this.Controls.Add(this.lbl_MousePositionLabel);
