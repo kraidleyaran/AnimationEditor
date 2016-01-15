@@ -42,3 +42,6 @@ C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEdi
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.exe.config
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\AnimationEditor.exe
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.exe
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Release\AnimationEditor.EditCollisionBoxWindow.resources
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\CollisionEngineLib.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Release\CollisionEngineLib.pdb

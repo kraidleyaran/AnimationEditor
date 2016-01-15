@@ -83,6 +83,7 @@
             this.lbl_MousePositionLabel = new System.Windows.Forms.Label();
             this.btn_FrameColor = new System.Windows.Forms.Button();
             this.btn_SaveAll = new System.Windows.Forms.Button();
+            this.btn_EditCollisionBox = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_TextureDisplay)).BeginInit();
             this.menuStrip_Main.SuspendLayout();
             this.panel_XNA.SuspendLayout();
@@ -106,7 +107,7 @@
             // listBox_Frames
             // 
             this.listBox_Frames.FormattingEnabled = true;
-            this.listBox_Frames.Location = new System.Drawing.Point(17, 58);
+            this.listBox_Frames.Location = new System.Drawing.Point(14, 107);
             this.listBox_Frames.Name = "listBox_Frames";
             this.listBox_Frames.Size = new System.Drawing.Size(70, 576);
             this.listBox_Frames.TabIndex = 1;
@@ -149,7 +150,7 @@
             // 
             this.lbl_AnimationName.AutoSize = true;
             this.lbl_AnimationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_AnimationName.Location = new System.Drawing.Point(160, 28);
+            this.lbl_AnimationName.Location = new System.Drawing.Point(159, 59);
             this.lbl_AnimationName.Name = "lbl_AnimationName";
             this.lbl_AnimationName.Size = new System.Drawing.Size(98, 13);
             this.lbl_AnimationName.TabIndex = 4;
@@ -157,7 +158,7 @@
             // 
             // txtBox_AnimationName
             // 
-            this.txtBox_AnimationName.Location = new System.Drawing.Point(104, 50);
+            this.txtBox_AnimationName.Location = new System.Drawing.Point(103, 81);
             this.txtBox_AnimationName.Name = "txtBox_AnimationName";
             this.txtBox_AnimationName.Size = new System.Drawing.Size(206, 20);
             this.txtBox_AnimationName.TabIndex = 3;
@@ -234,7 +235,7 @@
             // 
             this.lbl_SpriteSheet.AutoSize = true;
             this.lbl_SpriteSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SpriteSheet.Location = new System.Drawing.Point(503, 38);
+            this.lbl_SpriteSheet.Location = new System.Drawing.Point(500, 87);
             this.lbl_SpriteSheet.Name = "lbl_SpriteSheet";
             this.lbl_SpriteSheet.Size = new System.Drawing.Size(85, 13);
             this.lbl_SpriteSheet.TabIndex = 14;
@@ -243,7 +244,7 @@
             // btn_AddFrame
             // 
             this.btn_AddFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_AddFrame.Location = new System.Drawing.Point(17, 644);
+            this.btn_AddFrame.Location = new System.Drawing.Point(14, 693);
             this.btn_AddFrame.Name = "btn_AddFrame";
             this.btn_AddFrame.Size = new System.Drawing.Size(27, 23);
             this.btn_AddFrame.TabIndex = 2;
@@ -254,7 +255,7 @@
             // btn_RemoveFrame
             // 
             this.btn_RemoveFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
-            this.btn_RemoveFrame.Location = new System.Drawing.Point(60, 644);
+            this.btn_RemoveFrame.Location = new System.Drawing.Point(57, 693);
             this.btn_RemoveFrame.Name = "btn_RemoveFrame";
             this.btn_RemoveFrame.Size = new System.Drawing.Size(27, 23);
             this.btn_RemoveFrame.TabIndex = 3;
@@ -268,7 +269,7 @@
             this.panel_XNA.AutoScroll = true;
             this.panel_XNA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_XNA.Controls.Add(this.pictureBox_TextureDisplay);
-            this.panel_XNA.Location = new System.Drawing.Point(331, 57);
+            this.panel_XNA.Location = new System.Drawing.Point(328, 106);
             this.panel_XNA.Name = "panel_XNA";
             this.panel_XNA.Size = new System.Drawing.Size(619, 271);
             this.panel_XNA.TabIndex = 1;
@@ -348,7 +349,7 @@
             // 
             this.lbl_CurrentFrame.AutoSize = true;
             this.lbl_CurrentFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CurrentFrame.Location = new System.Drawing.Point(165, 335);
+            this.lbl_CurrentFrame.Location = new System.Drawing.Point(159, 418);
             this.lbl_CurrentFrame.Name = "lbl_CurrentFrame";
             this.lbl_CurrentFrame.Size = new System.Drawing.Size(86, 13);
             this.lbl_CurrentFrame.TabIndex = 26;
@@ -369,7 +370,7 @@
             this.panel_AnimationInformation.Controls.Add(this.txtBox_Speed);
             this.panel_AnimationInformation.Controls.Add(this.lbl_Scale);
             this.panel_AnimationInformation.Controls.Add(this.lbl_CurrentFrameCount);
-            this.panel_AnimationInformation.Location = new System.Drawing.Point(95, 76);
+            this.panel_AnimationInformation.Location = new System.Drawing.Point(94, 107);
             this.panel_AnimationInformation.Name = "panel_AnimationInformation";
             this.panel_AnimationInformation.Size = new System.Drawing.Size(228, 167);
             this.panel_AnimationInformation.TabIndex = 27;
@@ -422,7 +423,7 @@
             this.panel_CurrentFrameInformation.Controls.Add(this.lbl_Y);
             this.panel_CurrentFrameInformation.Controls.Add(this.lbl_Width);
             this.panel_CurrentFrameInformation.Controls.Add(this.lbl_Height);
-            this.panel_CurrentFrameInformation.Location = new System.Drawing.Point(100, 355);
+            this.panel_CurrentFrameInformation.Location = new System.Drawing.Point(94, 438);
             this.panel_CurrentFrameInformation.Name = "panel_CurrentFrameInformation";
             this.panel_CurrentFrameInformation.Size = new System.Drawing.Size(222, 135);
             this.panel_CurrentFrameInformation.TabIndex = 28;
@@ -458,7 +459,7 @@
             // lbl_TextureName
             // 
             this.lbl_TextureName.AutoSize = true;
-            this.lbl_TextureName.Location = new System.Drawing.Point(594, 38);
+            this.lbl_TextureName.Location = new System.Drawing.Point(591, 87);
             this.lbl_TextureName.Name = "lbl_TextureName";
             this.lbl_TextureName.Size = new System.Drawing.Size(33, 13);
             this.lbl_TextureName.TabIndex = 29;
@@ -466,7 +467,7 @@
             // 
             // btn_SetSpriteSheet
             // 
-            this.btn_SetSpriteSheet.Location = new System.Drawing.Point(794, 28);
+            this.btn_SetSpriteSheet.Location = new System.Drawing.Point(791, 77);
             this.btn_SetSpriteSheet.Name = "btn_SetSpriteSheet";
             this.btn_SetSpriteSheet.Size = new System.Drawing.Size(94, 23);
             this.btn_SetSpriteSheet.TabIndex = 18;
@@ -478,7 +479,7 @@
             // 
             this.lbl_Frames.AutoSize = true;
             this.lbl_Frames.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Frames.Location = new System.Drawing.Point(28, 38);
+            this.lbl_Frames.Location = new System.Drawing.Point(25, 87);
             this.lbl_Frames.Name = "lbl_Frames";
             this.lbl_Frames.Size = new System.Drawing.Size(47, 13);
             this.lbl_Frames.TabIndex = 31;
@@ -489,7 +490,7 @@
             this.panel_FrameDisplay.AutoScroll = true;
             this.panel_FrameDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_FrameDisplay.Controls.Add(this.pictureBox_FrameDisplay);
-            this.panel_FrameDisplay.Location = new System.Drawing.Point(332, 388);
+            this.panel_FrameDisplay.Location = new System.Drawing.Point(329, 437);
             this.panel_FrameDisplay.Name = "panel_FrameDisplay";
             this.panel_FrameDisplay.Size = new System.Drawing.Size(618, 266);
             this.panel_FrameDisplay.TabIndex = 32;
@@ -510,7 +511,7 @@
             // 
             this.label_DisplayFrameCurrent.AutoSize = true;
             this.label_DisplayFrameCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_DisplayFrameCurrent.Location = new System.Drawing.Point(594, 365);
+            this.label_DisplayFrameCurrent.Location = new System.Drawing.Point(591, 414);
             this.label_DisplayFrameCurrent.Name = "label_DisplayFrameCurrent";
             this.label_DisplayFrameCurrent.Size = new System.Drawing.Size(86, 13);
             this.label_DisplayFrameCurrent.TabIndex = 33;
@@ -518,7 +519,7 @@
             // 
             // btn_Preview
             // 
-            this.btn_Preview.Location = new System.Drawing.Point(219, 263);
+            this.btn_Preview.Location = new System.Drawing.Point(218, 294);
             this.btn_Preview.Name = "btn_Preview";
             this.btn_Preview.Size = new System.Drawing.Size(91, 23);
             this.btn_Preview.TabIndex = 10;
@@ -528,7 +529,7 @@
             // 
             // btn_SetFrame
             // 
-            this.btn_SetFrame.Location = new System.Drawing.Point(169, 497);
+            this.btn_SetFrame.Location = new System.Drawing.Point(163, 580);
             this.btn_SetFrame.Name = "btn_SetFrame";
             this.btn_SetFrame.Size = new System.Drawing.Size(75, 23);
             this.btn_SetFrame.TabIndex = 15;
@@ -538,7 +539,7 @@
             // 
             // btn_SetAnimation
             // 
-            this.btn_SetAnimation.Location = new System.Drawing.Point(97, 263);
+            this.btn_SetAnimation.Location = new System.Drawing.Point(96, 294);
             this.btn_SetAnimation.Name = "btn_SetAnimation";
             this.btn_SetAnimation.Size = new System.Drawing.Size(108, 23);
             this.btn_SetAnimation.TabIndex = 9;
@@ -548,7 +549,7 @@
             // 
             // btn_GridTool
             // 
-            this.btn_GridTool.Location = new System.Drawing.Point(137, 572);
+            this.btn_GridTool.Location = new System.Drawing.Point(131, 655);
             this.btn_GridTool.Name = "btn_GridTool";
             this.btn_GridTool.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btn_GridTool.Size = new System.Drawing.Size(131, 23);
@@ -559,7 +560,7 @@
             // 
             // btn_CloneFrame
             // 
-            this.btn_CloneFrame.Location = new System.Drawing.Point(164, 525);
+            this.btn_CloneFrame.Location = new System.Drawing.Point(158, 608);
             this.btn_CloneFrame.Name = "btn_CloneFrame";
             this.btn_CloneFrame.Size = new System.Drawing.Size(83, 23);
             this.btn_CloneFrame.TabIndex = 16;
@@ -569,7 +570,7 @@
             // 
             // btn_FrameBackgroundColor
             // 
-            this.btn_FrameBackgroundColor.Location = new System.Drawing.Point(331, 663);
+            this.btn_FrameBackgroundColor.Location = new System.Drawing.Point(328, 712);
             this.btn_FrameBackgroundColor.Name = "btn_FrameBackgroundColor";
             this.btn_FrameBackgroundColor.Size = new System.Drawing.Size(109, 23);
             this.btn_FrameBackgroundColor.TabIndex = 21;
@@ -579,7 +580,7 @@
             // 
             // btn_TextureBackgroundColor
             // 
-            this.btn_TextureBackgroundColor.Location = new System.Drawing.Point(332, 334);
+            this.btn_TextureBackgroundColor.Location = new System.Drawing.Point(329, 383);
             this.btn_TextureBackgroundColor.Name = "btn_TextureBackgroundColor";
             this.btn_TextureBackgroundColor.Size = new System.Drawing.Size(108, 23);
             this.btn_TextureBackgroundColor.TabIndex = 19;
@@ -590,7 +591,7 @@
             // lbl_MouseState
             // 
             this.lbl_MouseState.AutoSize = true;
-            this.lbl_MouseState.Location = new System.Drawing.Point(821, 335);
+            this.lbl_MouseState.Location = new System.Drawing.Point(818, 384);
             this.lbl_MouseState.Name = "lbl_MouseState";
             this.lbl_MouseState.Size = new System.Drawing.Size(67, 13);
             this.lbl_MouseState.TabIndex = 83;
@@ -600,7 +601,7 @@
             // 
             this.lbl_MousePositionLabel.AutoSize = true;
             this.lbl_MousePositionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_MousePositionLabel.Location = new System.Drawing.Point(718, 335);
+            this.lbl_MousePositionLabel.Location = new System.Drawing.Point(715, 384);
             this.lbl_MousePositionLabel.Name = "lbl_MousePositionLabel";
             this.lbl_MousePositionLabel.Size = new System.Drawing.Size(97, 13);
             this.lbl_MousePositionLabel.TabIndex = 84;
@@ -608,7 +609,7 @@
             // 
             // btn_FrameColor
             // 
-            this.btn_FrameColor.Location = new System.Drawing.Point(446, 334);
+            this.btn_FrameColor.Location = new System.Drawing.Point(443, 383);
             this.btn_FrameColor.Name = "btn_FrameColor";
             this.btn_FrameColor.Size = new System.Drawing.Size(75, 23);
             this.btn_FrameColor.TabIndex = 20;
@@ -618,7 +619,7 @@
             // 
             // btn_SaveAll
             // 
-            this.btn_SaveAll.Location = new System.Drawing.Point(172, 0);
+            this.btn_SaveAll.Location = new System.Drawing.Point(169, 27);
             this.btn_SaveAll.Name = "btn_SaveAll";
             this.btn_SaveAll.Size = new System.Drawing.Size(75, 23);
             this.btn_SaveAll.TabIndex = 85;
@@ -627,11 +628,22 @@
             this.btn_SaveAll.Click += new System.EventHandler(this.btn_SaveAll_Click);
             this.btn_SaveAll.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btn_SaveAll_KeyDown);
             // 
+            // btn_EditCollisionBox
+            // 
+            this.btn_EditCollisionBox.Location = new System.Drawing.Point(158, 335);
+            this.btn_EditCollisionBox.Name = "btn_EditCollisionBox";
+            this.btn_EditCollisionBox.Size = new System.Drawing.Size(96, 23);
+            this.btn_EditCollisionBox.TabIndex = 86;
+            this.btn_EditCollisionBox.Text = "Edit Collision Box";
+            this.btn_EditCollisionBox.UseVisualStyleBackColor = true;
+            this.btn_EditCollisionBox.Click += new System.EventHandler(this.btn_EditCollisionBox_Click);
+            // 
             // EditAnimationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1027, 698);
+            this.ClientSize = new System.Drawing.Size(1027, 797);
+            this.Controls.Add(this.btn_EditCollisionBox);
             this.Controls.Add(this.btn_SaveAll);
             this.Controls.Add(this.btn_FrameColor);
             this.Controls.Add(this.lbl_MousePositionLabel);
@@ -739,5 +751,6 @@
         private System.Windows.Forms.Button btn_SetFrameNumber;
         private System.Windows.Forms.ToolStripMenuItem saveAndExitToolStripMenuItem;
         private System.Windows.Forms.Button btn_SaveAll;
+        private System.Windows.Forms.Button btn_EditCollisionBox;
     }
 }

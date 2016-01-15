@@ -45,6 +45,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EditCollisionBoxWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCollisionBoxWindow.Designer.cs">
+      <DependentUpon>EditCollisionBoxWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameClasses\AnimationGame.cs" />
     <Compile Include="EditAnimationWindow.cs">
       <SubType>Form</SubType>
@@ -100,6 +106,10 @@
     <Compile Include="StaticMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CollisionEngineLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ExtrenalRefs\CollisionEngineLib.dll</HintPath>
+    </Reference>
     <Reference Include="Cyotek.Windows.Forms.ColorPicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExtrenalRefs\Cyotek.Windows.Forms.ColorPicker.dll</HintPath>
@@ -130,6 +140,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExtrenalRefs\CollisionEngineLib.dll" />
+    <Content Include="ExtrenalRefs\CollisionEngineLib.pdb" />
     <Content Include="ExtrenalRefs\Cyotek.Windows.Forms.ColorPicker.dll" />
     <Content Include="ExtrenalRefs\FileDialogLib.dll" />
     <Content Include="ExtrenalRefs\FileDialogLib.pdb" />
@@ -148,6 +160,9 @@
   <ItemGroup>
     <EmbeddedResource Include="EditAnimationWindow.resx">
       <DependentUpon>EditAnimationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCollisionBoxWindow.resx">
+      <DependentUpon>EditCollisionBoxWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GridFrameTool.resx">
       <DependentUpon>GridFrameTool.cs</DependentUpon>

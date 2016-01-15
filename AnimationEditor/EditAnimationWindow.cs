@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
 using Cyotek.Windows.Forms;
+using GameArchiveLib;
 using GameGraphicsLib;
 using GameGraphicsLib.DrawableShapes;
 using Microsoft.Xna.Framework;
@@ -95,7 +96,7 @@ namespace AnimationEditor
                     {
                         case DialogResult.OK:
                             ReturnAnimation = new Animation(newAnimationNameWindow.ReturnName, "", 0, 1, 1, Vector2.Zero,
-                                Vector2.Zero, 1);
+                                Vector2.Zero, 1, new CollisionEngineLib.Objects.Collidable(0,0,0,0,false));
                             txtBox_AnimationName.Text = ReturnAnimation.Name;
                             SetAnimationFields(ReturnAnimation);
                             originalName = newAnimationNameWindow.ReturnName;
@@ -130,7 +131,7 @@ namespace AnimationEditor
                 }
                 DialogResult = DialogResult.OK;
             }
-            else
+            else 
             {
                 BinaryTexture texture = _binaryTextures.FirstOrDefault(t => t.Name == ReturnAnimation.Texture);
                 if (texture == null)
@@ -166,7 +167,7 @@ namespace AnimationEditor
                 foreach (BinaryTexture texture in _binaryTextures)
                 {
                     _textureGame.gameGraphics.textureManager.Textures.Add(texture.Name, TextureManager.ConvertDataToTexture(texture, _textureGame.gameGraphics.GraphicsManager.GraphicsDevice));
-                    Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
+                    Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1, new CollisionEngineLib.Objects.Collidable(0,0,1,1, true));
                     textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, texture.Width, texture.Height)));
                     _textureGame.gameGraphics.AddDrawable(textureAnimation);
                 }
@@ -185,18 +186,18 @@ namespace AnimationEditor
                 DrawnRectangle frameRectangle = new DrawnRectangle
                 {
                     Name = FrameRectangleName,
-                    PositionX = 0,
-                    PositionY = 0,
+                    X = 0,
+                    Y = 0,
                     Size = new Size(0, 0),
                     Thickness = 1,
                     Color = GameGraphics.ConvertSystemColorToXNA(System.Drawing.Color.Fuchsia)
                 };
                 _textureGame.gameGraphics.AddDrawable(frameRectangle);
-                _textureGame.gameGraphics.AddToDrawList(new DrawParam(FrameRectangleName, FrameRectangleName,new Vector2(frameRectangle.PositionX, frameRectangle.PositionY), DrawnType.Shape));
+                _textureGame.gameGraphics.AddToDrawList(new DrawParam(FrameRectangleName, FrameRectangleName,new Vector2(frameRectangle.X, frameRectangle.Y), DrawnType.Shape));
                 MakeTextureLoopFrame(CurrentTextureAnimationName);
                 SetAnimationTexture(textureName);
             };
-            // This is here to prevent _textueGame from malfunctioning when tabbing through text fields. Not sure why, probably should look at that later.
+            //TODO: This is here to prevent _textueGame from malfunctioning when tabbing through text fields. Not sure why, probably should look at that later.
             SendKeys.Send("{TAB}");
             
             
@@ -892,6 +893,17 @@ namespace AnimationEditor
             btn_CloneFrame.Enabled = true;
             btn_SetFrameNumber.Enabled = true;
             btn_RemoveFrame.Enabled = true;
+        }
+
+        private void collisionBoxesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        } 
+
+        private void btn_EditCollisionBox_Click(object sender, EventArgs e)
+        {
+            EditCollisionBoxWindow editCollisionBox = new EditCollisionBoxWindow(ReturnAnimation, _binaryTextures.Find(t => t.Name == ReturnAnimation.Texture));
+            editCollisionBox.ShowDialog();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace AnimationEditor
         private bool fileLoaded = false;
         private string filePath = "";
         private bool fileChanged = false;
+        private string defaultFileName = "New";
 
         private GameArchive gameArchive = GameArchive.Instance;
         public GraphicsManager graphicsManager;
@@ -50,6 +51,7 @@ namespace AnimationEditor
             binaryTextures = new List<BinaryTexture>();
             foreach (KeyValuePair<string, BinaryTexture> pair in spriteManagerWindow.ReturnTextures)
             {
+                if (Game.gameGraphics.textureManager.Textures.ContainsKey(pair.Key)) continue;
                 Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
                 binaryTextures.Add(pair.Value);
             }
@@ -171,7 +173,7 @@ namespace AnimationEditor
 
         private Response SaveAs()
         {
-            Response response = gameFileDialog.SaveFile<GraphicsData>(Game.gameGraphics.SaveData(), "ggcd", "Graphics");
+            Response response = gameFileDialog.SaveFile<GraphicsData>(Game.gameGraphics.SaveData(), "agd", "Graphics", defaultFileName);
             if (response.ValidData)
             {
                 MessageBox.Show("File succesfuly saved", "File saved", MessageBoxButtons.OK);
@@ -182,11 +184,12 @@ namespace AnimationEditor
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Response response = gameFileDialog.LoadFile<GraphicsData>("ggcd", "Graphics");
+            Response response = gameFileDialog.LoadFile<GraphicsData>("agd", "Graphics");
             if (!response.ValidData) return;
             
             LoadGraphicsData((GraphicsData)response.Data);
             filePath = response.DirectoryPath;
+            defaultFileName = response.FileName;
             MessageBox.Show("File succesfully loaded", "File loadead", MessageBoxButtons.OK);
         }
 
@@ -196,6 +199,7 @@ namespace AnimationEditor
             {
                 Game.gameGraphics.textureManager.ClearAllTextures();
                 Game.gameGraphics.AddTexture(texture.Name,TextureManager.ConvertDataToTexture(texture, Game.gameGraphics.GraphicsManager.GraphicsDevice));
+                binaryTextures.Add(texture);
             }
             listBox_Animations.Items.Clear();
             foreach (IDrawn drawObject in data.DrawnObjects)

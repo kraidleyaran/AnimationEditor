@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AnimationEditor.GameClasses;
+using CollisionEngineLib.Objects;
 using GameGraphicsLib;
 using GraphicsManagerLib;
 using GraphicsManagerLib.Actions.AnimationAction;
@@ -60,7 +61,7 @@ namespace AnimationEditor
                 {
                     Game.gameGraphics.textureManager.Textures.Add(pair.Key, TextureManager.ConvertDataToTexture(pair.Value, Game.gameGraphics.GraphicsManager.GraphicsDevice));
                     AddTextureLabelToList(pair.Value.Name);
-                    Animation textureAnimation = new Animation(pair.Value.Name, pair.Value.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
+                    Animation textureAnimation = new Animation(pair.Value.Name, pair.Value.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1, new Collidable(0,0,0,0, false));
                     textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, pair.Value.Width, pair.Value.Height)));
                     Game.gameGraphics.AddDrawable(textureAnimation);
                 }
@@ -78,7 +79,7 @@ namespace AnimationEditor
         {
             AddTextureLabelToList(texture.Name);
             Game.gameGraphics.textureManager.Textures.Add(texture.Name, texture);
-            Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0,0), new Vector2(0,0),1);
+            Animation textureAnimation = new Animation(texture.Name, texture.Name, 0, 1, 1, new Vector2(0,0), new Vector2(0,0),1, new Collidable());
             textureAnimation.AddFrame(new Frame(new GameRectangle(0, 0, texture.Width, texture.Height)));
             Game.gameGraphics.AddDrawable(textureAnimation);
         }
@@ -118,7 +119,7 @@ namespace AnimationEditor
                                 newTexture.Name = spriteSheetName.ReturnName;
                                 AddTextureToList(newTexture);
                                 Animation textureAnimation = new Animation(newTexture.Name,
-                                    newTexture.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1);
+                                    newTexture.Name, 0, 1, 1, new Vector2(0, 0), new Vector2(0, 0), 1, new Collidable());
                                 /*{
                                     IsLoop = true
                                 };

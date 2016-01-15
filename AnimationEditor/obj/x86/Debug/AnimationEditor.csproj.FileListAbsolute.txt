@@ -79,3 +79,6 @@ C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEdi
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\FileDialogLib.pdb
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GameArchiveLib.dll
 C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\GameArchiveLib.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\CollisionEngineLib.dll
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\bin\Windows\Debug\CollisionEngineLib.pdb
+C:\Users\Alex\Documents\Visual Studio 2013\Projects\AnimationEditor\AnimationEditor\obj\x86\Debug\AnimationEditor.EditCollisionBoxWindow.resources
